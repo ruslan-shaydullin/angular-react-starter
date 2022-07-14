@@ -18,7 +18,12 @@
     "coverage": "react-scripts test --coverage --watchAll=false",
     "serve": "node server",
     "eject": "react-scripts eject",
-    "lint": "eslint \"src/**/*.{js,jsx}\""
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "prestart": "node ../scripts/sync-shared.cjs react",
+    "prebuild": "node ../scripts/sync-shared.cjs react",
+    "pretest": "node ../scripts/sync-shared.cjs react",
+    "precoverage": "node ../scripts/sync-shared.cjs react",
+    "prelint": "node ../scripts/sync-shared.cjs react"
   },
   "eslintConfig": {
     "extends": [

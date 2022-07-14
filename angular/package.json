@@ -9,7 +9,12 @@
     "test": "ng test",
     "coverage": "ng test --no-watch --code-coverage",
     "serve": "node server",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prestart": "node ../scripts/sync-shared.cjs angular",
+    "prebuild": "node ../scripts/sync-shared.cjs angular",
+    "pretest": "node ../scripts/sync-shared.cjs angular",
+    "precoverage": "node ../scripts/sync-shared.cjs angular",
+    "prelint": "node ../scripts/sync-shared.cjs angular"
   },
   "private": true,
   "dependencies": {

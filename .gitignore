@@ -4,3 +4,6 @@ coverage/
 .DS_Store
 angular/src/workshop/shared/
 react/src/workshop/shared/
+
+angular/src/workshop/workshop.css
+react/src/workshop/workshop.css
