@@ -1,0 +1,1 @@
+{"name":"paired-release-workshop","version":"1.0.0","private":true,"scripts":{"shared":"node scripts/sync-shared.cjs","test":"node scripts/test-shared.cjs","check":"tsc -p shared/tsconfig.json --noEmit","install:apps":"npm ci --prefix angular && npm ci --prefix react"},"devDependencies":{"typescript":"4.7.4"},"engines":{"node":">=16"}}
