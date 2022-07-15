@@ -1,0 +1,32 @@
+:root { --ink:#17324d; --blue:#215b9a; --pale:#edf4fb; --paper:#fff; --line:#c7d5e2; --muted:#526579; --danger:#9b2638; font:16px/1.55 "Avenir Next", Avenir, "Segoe UI", sans-serif; color:var(--ink); background:#f4f7fa; }
+* { box-sizing:border-box; }
+body { margin:0; }
+a { color:var(--blue); }
+button,input,select,textarea { font:inherit; }
+button { cursor:pointer; border:1px solid var(--blue); background:white; color:var(--blue); padding:.4rem .8rem; border-radius:4px; }
+button:hover { background:var(--pale); }
+button:disabled { cursor:default; opacity:.5; }
+:focus-visible { outline:3px solid #cf7300; outline-offset:3px; }
+input,select,textarea { width:100%; border:1px solid #7f95aa; padding:.45rem .6rem; border-radius:3px; color:var(--ink); background:white; }
+label { display:grid; gap:.25rem; font-weight:600; }
+h1,h2,h3,p { margin-top:0; }
+h1 { font-size:2.3rem; letter-spacing:-.04em; line-height:1.15; }
+h2 { font-size:1.45rem; letter-spacing:-.02em; }
+h3 { font-size:1.05rem; }
+small,.muted { color:var(--muted); }
+.shell { max-width:1440px; margin:auto; padding:2rem; }
+.masthead { border-bottom:4px solid var(--blue); margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+.framework { padding:.4rem .8rem; border:1px solid var(--line); border-radius:4px; }
+nav { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+nav a { padding:.4rem .8rem; text-decoration:none; border-radius:3px; }
+nav a[aria-current=page] { background:var(--blue); color:white; }
+.panel { background:white; border:1px solid var(--line); border-radius:6px; padding:1.25rem; margin-bottom:1.25rem; }
+.stack { display:grid; gap:1rem; }
+.row { display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; }
+.row > label { flex:1; min-width:150px; }
+.primary { background:var(--blue); color:white; }
+.error { color:var(--danger); border-left:4px solid var(--danger); padding:.5rem 1rem; background:#fff1f3; }
+.notice { background:var(--pale); padding:.65rem 1rem; border-left:4px solid var(--blue); }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+.skip-link { position:absolute; top:-100px; padding:1rem; background:white; z-index:10; }
+.skip-link:focus { top:0; }
