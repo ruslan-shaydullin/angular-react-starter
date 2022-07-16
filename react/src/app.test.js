@@ -1,8 +1,3 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+import App from './app';
+test('exposes a named workspace and main landmark', () => { render(<App />); expect(screen.getByRole('heading',{name:'Release workshop'})).toBeInTheDocument(); expect(screen.getByRole('main')).toHaveAttribute('id','main'); });
