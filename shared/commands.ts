@@ -1,9 +1,12 @@
+import { saveView,removeView } from './saved-views';
 import { Workspace, Command, Result } from './types';
 import { failure, success } from './result';
 import { createTask } from './create-task';import { editTask } from './edit-task';import { transitionTask } from './status';import { setDependencies } from './dependencies';import { bulkStatus,bulkAssign } from './bulk';import { archiveTask } from './archive';import { duplicateTask } from './duplicate';import { addChecklistItem,toggleChecklistItem } from './checklist';import { addComment } from './comments';import { setEstimate } from './estimates';import { logTime } from './time-logs';import { scheduleFollowup } from './recurrence';import { setCapacity } from './capacity';import { saveProject } from './projects';import { addMember } from './members';import { saveMilestone } from './milestones';import { recordActivity } from './activity';import { previewCsv } from './csv-import';import { importSnapshot } from './snapshot-import';
 export function execute(state:Workspace,command:Command,now:string):Result<Workspace> {
  const p=command.payload||{};let result:Result<Workspace>;
  switch(command.type){
+  case 'view.save':result=saveView(state,p.name,p.filters);break;
+  case 'view.remove':result=removeView(state,p.id);break;
   case 'task.create':result=createTask(state,p,now);break;
   case 'task.edit':result=editTask(state,p.id,p.values,now);break;
   case 'task.status':result=transitionTask(state,p.id,p.status);break;
