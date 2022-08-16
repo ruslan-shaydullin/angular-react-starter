@@ -1,3 +1,4 @@
+import { setPreferences } from './preferences';
 import { saveView,removeView } from './saved-views';
 import { Workspace, Command, Result } from './types';
 import { failure, success } from './result';
@@ -5,6 +6,7 @@ import { createTask } from './create-task';import { editTask } from './edit-task
 export function execute(state:Workspace,command:Command,now:string):Result<Workspace> {
  const p=command.payload||{};let result:Result<Workspace>;
  switch(command.type){
+  case 'preferences.set':result=setPreferences(state,p);break;
   case 'view.save':result=saveView(state,p.name,p.filters);break;
   case 'view.remove':result=removeView(state,p.id);break;
   case 'task.create':result=createTask(state,p,now);break;
