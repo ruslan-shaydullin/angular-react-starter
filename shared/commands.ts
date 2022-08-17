@@ -1,3 +1,5 @@
+import { setTags } from './tags';
+import { moveOnBoard } from './board';
 import { setPreferences } from './preferences';
 import { saveView,removeView } from './saved-views';
 import { Workspace, Command, Result } from './types';
@@ -6,6 +8,8 @@ import { createTask } from './create-task';import { editTask } from './edit-task
 export function execute(state:Workspace,command:Command,now:string):Result<Workspace> {
  const p=command.payload||{};let result:Result<Workspace>;
  switch(command.type){
+  case 'task.tags':result=setTags(state,p.id,p.tags);break;
+  case 'task.move':result=p.direction===-1||p.direction===1?moveOnBoard(state,p.id,p.direction):failure(state,'Choose a movement direction.');break;
   case 'preferences.set':result=setPreferences(state,p);break;
   case 'view.save':result=saveView(state,p.name,p.filters);break;
   case 'view.remove':result=removeView(state,p.id);break;
