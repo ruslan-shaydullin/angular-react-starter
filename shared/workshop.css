@@ -59,3 +59,5 @@ tbody th { font-weight:500; min-width:220px; }
 @media(max-width:600px) { .shell { padding:.8rem; }.masthead { align-items:flex-start; }.masthead h1 { font-size:1.9rem; }.framework { font-size:.8rem; }.metrics { grid-template-columns:repeat(2,1fr); }.panel { padding:1rem; }.row { align-items:stretch; }.row>label { min-width:100%; }.timeline>li { grid-template-columns:1fr; gap:.5rem; }.notification-list li { align-items:flex-start; }nav { gap:.15rem; }nav a { padding:.4rem .5rem; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
 @media print { nav,button,.filters,.keyboard-help,footer { display:none!important; }.shell { padding:0; }.panel { break-inside:avoid; }.workspace-grid { display:block; }body { background:white; } }
+
+.release-notes { white-space:pre-wrap; overflow-wrap:anywhere; background:var(--pale); padding:1rem; font:inherit; }.undo-controls { margin-bottom:1rem; }
