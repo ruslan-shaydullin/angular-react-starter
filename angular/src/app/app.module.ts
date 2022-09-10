@@ -1,17 +1,3 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { ShellComponent } from './workshop/Shell.component';
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [
-    AppComponent, ShellComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+import {NgModule} from '@angular/core';import {BrowserModule} from '@angular/platform-browser';import {AppComponent} from './app.component';import {WorkshopModule} from './workshop/workshop.module';
+@NgModule({declarations:[AppComponent],imports:[BrowserModule,WorkshopModule],bootstrap:[AppComponent]})
+export class AppModule {}
