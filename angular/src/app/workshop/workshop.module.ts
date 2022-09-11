@@ -31,6 +31,7 @@ import {TimeEntryComponent} from './TimeEntry.component';
 import {TimelineComponent} from './Timeline.component';
 import {WorkloadComponent} from './Workload.component';
 import {WorkspaceComponent} from './Workspace.component';
-const COMPONENTS=[ActivityComponent,BoardComponent,BulkActionsComponent,CapacityEditorComponent,ChecklistComponent,CommentsComponent,DependenciesComponent,EmptyStateComponent,ExportComponent,FiltersComponent,ImportComponent,KeyboardHelpComponent,MilestonesComponent,NotificationsComponent,OverviewComponent,PaginationComponent,PreferencesComponent,ProjectEditorComponent,ProjectsComponent,ReadinessComponent,RowSelectionComponent,SavedViewsComponent,ShellComponent,StatusControlsComponent,TaskDetailComponent,TaskEditorComponent,TaskTableComponent,TeamComponent,TimeEntryComponent,TimelineComponent,WorkloadComponent,WorkspaceComponent];
+import {UndoControlsComponent} from './UndoControls.component';
+const COMPONENTS=[UndoControlsComponent,ActivityComponent,BoardComponent,BulkActionsComponent,CapacityEditorComponent,ChecklistComponent,CommentsComponent,DependenciesComponent,EmptyStateComponent,ExportComponent,FiltersComponent,ImportComponent,KeyboardHelpComponent,MilestonesComponent,NotificationsComponent,OverviewComponent,PaginationComponent,PreferencesComponent,ProjectEditorComponent,ProjectsComponent,ReadinessComponent,RowSelectionComponent,SavedViewsComponent,ShellComponent,StatusControlsComponent,TaskDetailComponent,TaskEditorComponent,TaskTableComponent,TeamComponent,TimeEntryComponent,TimelineComponent,WorkloadComponent,WorkspaceComponent];
 @NgModule({imports:[CommonModule,FormsModule],declarations:COMPONENTS,exports:COMPONENTS})
 export class WorkshopModule {}
