@@ -4,12 +4,15 @@ import { failure, success } from './result';
 export function bulkStatus(state:Workspace,ids:string[],status:Status):Result<Workspace> {
  const unique=Array.from(new Set(ids));
  if(!unique.length) return failure(state,'Select at least one task.');
- let next=state;const errors:string[]=[];
- for(const id of unique) {
-  const result=transitionTask(next,id,status);
-  if(result.ok) next=result.value; else errors.push(...result.errors.map(error=>id+': '+error));
+ let next=state;let pending=[...unique];
+ // Retry blocked work after completing selected prerequisites; selection order is not semantic.
+ while(pending.length){
+  const remaining:string[]=[];const errors:string[]=[];let progressed=false;
+  for(const id of pending){const result=transitionTask(next,id,status);if(result.ok){next=result.value;progressed=true;}else{remaining.push(id);errors.push(...result.errors.map(error=>id+': '+error));}}
+  if(!progressed)return failure(state,...errors);
+  pending=remaining;
  }
- return errors.length?failure(state,...errors):success(next);
+ return success(next);
 }
 export function bulkAssign(state:Workspace,ids:string[],assignee:string):Result<Workspace> {
  if(!ids.length) return failure(state,'Select at least one task.');
