@@ -1,0 +1,5 @@
+import {screen,fireEvent,within} from '@testing-library/react';
+import {renderWorkshop,storedWorkspace,changeRoute,openTask} from './testHelpers';
+
+test('completion errors explain checklist requirements and recover after review',async()=>{const {user}=renderWorkshop('#/tasks/T-101');await user.selectOptions(screen.getByLabelText('Task status'),'done');expect(screen.getByRole('alert')).toHaveTextContent('Complete every checklist');expect(screen.getByLabelText('Task status')).toHaveValue('review');await user.click(screen.getByRole('checkbox',{name:'Acceptance criteria reviewed'}));await user.selectOptions(screen.getByLabelText('Task status'),'done');expect(screen.getByLabelText('Task status')).toHaveValue('done');expect(storedWorkspace().tasks.find(task=>task.id==='T-101').status).toBe('done');});
+test('unfinished dependencies reject completion',async()=>{const {user}=renderWorkshop('#/tasks/T-102');await user.selectOptions(screen.getByLabelText('Task status'),'done');expect(screen.getByRole('alert')).toHaveTextContent('Complete dependencies');});
