@@ -7,7 +7,7 @@ export function validDate(value:string):boolean {
 }
 export function validateTask(input:unknown,state:Workspace):Result<TaskDraft> {
  const raw=isRecord(input)?input:{};
- const value:TaskDraft={title:cleanText(raw.title),description:cleanText(raw.description),status:raw.status as Task['status'],priority:raw.priority as Task['priority'],projectId:cleanText(raw.projectId),assignee:cleanText(raw.assignee),dueDate:cleanText(raw.dueDate),estimate:Number(raw.estimate)};
+ const value:TaskDraft={title:cleanText(raw['title']),description:cleanText(raw['description']),status:raw['status'] as Task['status'],priority:raw['priority'] as Task['priority'],projectId:cleanText(raw['projectId']),assignee:cleanText(raw['assignee']),dueDate:cleanText(raw['dueDate']),estimate:Number(raw['estimate'])};
  const errors:string[]=[];
  if(value.title.length<3 || value.title.length>120) errors.push('Title must contain 3 to 120 characters.');
  if(value.description.length>2000) errors.push('Description must contain at most 2,000 characters.');

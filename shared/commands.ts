@@ -36,6 +36,6 @@ export function execute(state:Workspace,command:Command,now:string):Result<Works
   default:return failure(state,'Unknown workspace command: '+command.type);
  }
  if(!result.ok||result.value===state)return result;
- const changed={...result.value,revision:state.revision+1,tasks:result.value.tasks.map(task=>state.tasks.find(original=>original.id===task.id)===task?task:{...task,updatedAt:now})};
+ const changed={...result.value,revision:state.revision+1,tasks:result.value.tasks===state.tasks?state.tasks:result.value.tasks.map(task=>state.tasks.find(original=>original.id===task.id)===task?task:{...task,updatedAt:now})};
  return success(recordActivity(changed,command.type.replace(/\./g,' '),now,typeof p.id==='string'?p.id:undefined));
 }

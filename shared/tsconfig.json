@@ -1,1 +1,19 @@
-{"compilerOptions":{"target":"es2020","module":"commonjs","strict":true,"esModuleInterop":true,"skipLibCheck":true,"lib":["es2020","dom"],"outDir":"../.shared-build"},"include":["*.ts"]}
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "outDir": "../.shared-build",
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true
+  },
+  "include": [
+    "*.ts"
+  ]
+}

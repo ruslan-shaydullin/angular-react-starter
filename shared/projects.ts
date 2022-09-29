@@ -1,7 +1,7 @@
 import { Workspace, Result, Project } from './types';
 import { failure, success, cleanText, nextId, isRecord } from './result';
 export function saveProject(state:Workspace,input:unknown,id?:string):Result<Workspace> {
- const raw=isRecord(input)?input:{};const name=cleanText(raw.name),description=cleanText(raw.description),color=cleanText(raw.color)||'#215b9a';
+ const raw=isRecord(input)?input:{};const name=cleanText(raw['name']),description=cleanText(raw['description']),color=cleanText(raw['color'])||'#215b9a';
  if(id&&!state.projects.some(project=>project.id===id))return failure(state,'Project no longer exists.');
  if(name.length<3||name.length>80)return failure(state,'Project name must contain 3 to 80 characters.');
  if(description.length>500)return failure(state,'Project description must contain at most 500 characters.');

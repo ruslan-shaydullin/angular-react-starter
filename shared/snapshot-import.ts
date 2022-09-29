@@ -5,12 +5,12 @@ import { dependencyPath } from './dependencies';
 export function importSnapshot(text:string,current:Workspace):Result<Workspace> {
  if(text.length>2000000)return failure(current,'Snapshot must be smaller than 2 MB.');
  let raw:unknown;try{raw=JSON.parse(text);}catch{return failure(current,'Snapshot is not valid JSON.');}
- if(!isRecord(raw)||raw.format!=='release-workshop'||raw.version!==1||!isRecord(raw.workspace))return failure(current,'Unsupported snapshot format or version.');
- const w=raw.workspace;
+ if(!isRecord(raw)||raw['format']!=='release-workshop'||raw['version']!==1||!isRecord(raw['workspace']))return failure(current,'Unsupported snapshot format or version.');
+ const w=raw['workspace'];
  const arrays=['tasks','projects','members','milestones','activity','views'];
- if(w.version!==1||!Number.isInteger(w.revision)||Number(w.revision)<0||arrays.some(key=>!Array.isArray(w[key])||(w[key] as unknown[]).length>2000)||!isRecord(w.preferences))return failure(current,'Snapshot structure is incomplete.');
+ if(w['version']!==1||!Number.isInteger(w['revision'])||Number(w['revision'])<0||arrays.some(key=>!Array.isArray(w[key])||(w[key] as unknown[]).length>2000)||!isRecord(w['preferences']))return failure(current,'Snapshot structure is incomplete.');
  const state=w as unknown as Workspace;
- const idsValid=(items:any[])=>items.every(item=>isRecord(item)&&typeof item.id==='string'&&item.id.length>0&&item.id.length<=100)&&new Set(items.map(item=>item.id)).size===items.length;
+ const idsValid=(items:any[])=>items.every(item=>isRecord(item)&&typeof item['id']==='string'&&item['id'].length>0&&item['id'].length<=100)&&new Set(items.map(item=>item.id)).size===items.length;
  if(arrays.some(key=>!idsValid(w[key] as any[])))return failure(current,'Snapshot identifiers must be present and unique.');
  if(state.projects.some(project=>typeof project.name!=='string'||typeof project.description!=='string'||!/^#[0-9a-f]{6}$/i.test(project.color))||state.members.some(member=>typeof member.name!=='string'||typeof member.role!=='string'||!Number.isInteger(member.capacity)||member.capacity<0||member.capacity>100))return failure(current,'Snapshot contains invalid projects or members.');
  for(const task of state.tasks){
