@@ -1,0 +1,5 @@
+import {screen,fireEvent,within} from '@testing-library/react';
+import {renderWorkshop,storedWorkspace,changeRoute,openTask} from './testHelpers';
+
+test('preview rejects malformed input before mutation is enabled',async()=>{const {user}=renderWorkshop('#/settings');await user.type(screen.getByLabelText('Import text'),'wrong,header');await user.click(screen.getByRole('button',{name:'Preview import'}));expect(screen.getByText(/CSV header must match/)).toBeInTheDocument();expect(screen.getByRole('button',{name:'Import tasks'})).toBeDisabled();});
+test('editing import text invalidates an earlier preview',async()=>{const {user}=renderWorkshop('#/settings');await user.type(screen.getByLabelText('Import text'),'title,description,status,priority,projectId,assignee,dueDate,estimate');await user.click(screen.getByRole('button',{name:'Preview import'}));expect(screen.getByRole('button',{name:'Import tasks'})).toBeEnabled();await user.type(screen.getByLabelText('Import text'),'x');expect(screen.queryByRole('button',{name:'Import tasks'})).not.toBeInTheDocument();});
