@@ -1,0 +1,3 @@
+import {setup,settle,button,control,change} from './test-helpers';
+
+describe('Time entry',()=>{it('retains invalid minutes and records a corrected value',async()=>{const {fixture,element,store}=await setup('#/tasks/T-103');change(control(element,'Minutes worked'),'-5');await settle(fixture);button(element,'Record time').click();await settle(fixture);expect(element.querySelector('[role="alert"]')?.textContent).toContain('1 to 1,440 whole minutes');expect(control(element,'Minutes worked').value).toBe('-5');change(control(element,'Minutes worked'),'90');await settle(fixture);button(element,'Record time').click();await settle(fixture);expect(element.textContent).toContain('Time recorded: 1h 30m');expect(store.state.tasks[2].timeEntries.length).toBe(1);});});
