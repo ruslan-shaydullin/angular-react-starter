@@ -1,1 +1,16 @@
-<input *ngIf="task" class="selection-box" type="checkbox" [attr.aria-label]="'Select '+task.title" [disabled]="task.archived" [checked]="s.selected.includes(task.id)" (change)="toggle()"><button *ngIf="!task" [disabled]="!tasks.length" [attr.aria-pressed]="all" (click)="selectVisible()">{{all?'Deselect matching tasks':'Select matching tasks'}}</button>
+<input
+  *ngIf="task"
+  class="selection-box"
+  type="checkbox"
+  [attr.aria-label]="'Select ' + task.title"
+  [disabled]="task.archived"
+  [checked]="s.selected.includes(task.id)"
+  (change)="toggle()"
+/><button
+  *ngIf="!task"
+  [disabled]="!tasks.length"
+  [attr.aria-pressed]="all"
+  (click)="selectVisible()"
+>
+  {{ all ? 'Deselect matching tasks' : 'Select matching tasks' }}
+</button>

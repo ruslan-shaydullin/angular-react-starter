@@ -1,2 +1,34 @@
-import {useWorkshop} from './store';import {taskTimeline,weekDates} from './shared/timeline';import {formatDate} from './shared/dates';import {DEMO_DATE} from './shared/types';
-export default function Timeline(){const {state,navigate}=useWorkshop();const week=weekDates(DEMO_DATE,state.preferences.weekStartsOn);return <section className="panel"><h2>Delivery timeline</h2><p className="muted">Reference week: {formatDate(week[0])} to {formatDate(week[6])}. Tasks without due dates do not appear here.</p><ol className="timeline">{taskTimeline(state).map(group=><li key={group.date}><time dateTime={group.date}>{formatDate(group.date)}</time><ul>{group.tasks.map(task=><li key={task.id}><button className="text-button" onClick={()=>navigate('tasks',task.id)}>{task.title}</button> <small>{task.status}</small></li>)}</ul></li>)}</ol></section>;}
+import { useWorkshop } from './store';
+import { taskTimeline, weekDates } from './shared/timeline';
+import { formatDate } from './shared/dates';
+import { DEMO_DATE } from './shared/types';
+export default function Timeline() {
+  const { state, navigate } = useWorkshop();
+  const week = weekDates(DEMO_DATE, state.preferences.weekStartsOn);
+  return (
+    <section className="panel">
+      <h2>Delivery timeline</h2>
+      <p className="muted">
+        Reference week: {formatDate(week[0])} to {formatDate(week[6])}. Tasks without due dates do
+        not appear here.
+      </p>
+      <ol className="timeline">
+        {taskTimeline(state).map((group) => (
+          <li key={group.date}>
+            <time dateTime={group.date}>{formatDate(group.date)}</time>
+            <ul>
+              {group.tasks.map((task) => (
+                <li key={task.id}>
+                  <button className="text-button" onClick={() => navigate('tasks', task.id)}>
+                    {task.title}
+                  </button>{' '}
+                  <small>{task.status}</small>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}

@@ -1,2 +1,86 @@
-import {useState} from 'react';import {useWorkshop} from './store';import {filterTasks} from './shared/filters';import {sortTasks} from './shared/sorting';import {paginate} from './shared/pagination';import {statusLabel} from './shared/status';import {memberName} from './shared/members';import {formatDate} from './shared/dates';
-export default function TaskTable({renderSelection}){const {state,filters,page,navigate}=useWorkshop();const [sort,setSort]=useState({key:'dueDate',direction:'asc'});const rows=paginate(sortTasks(filterTasks(state,filters).filter(task=>state.preferences.showCompleted||task.status!=='done'),sort.key,sort.direction),page,6);function change(key){setSort({key,direction:sort.key===key&&sort.direction==='asc'?'desc':'asc'});}return <div className="table-scroll"><table><caption>Release tasks ({rows.total} matching)</caption><thead><tr>{renderSelection&&<th scope="col">Select</th>}{[['title','Task'],['status','Status'],['priority','Priority'],['dueDate','Due date'],['estimate','Points']].map(([key,label])=><th scope="col" key={key} aria-sort={sort.key===key?(sort.direction==='asc'?'ascending':'descending'):'none'}><button onClick={()=>change(key)}>{label}{sort.key===key?(sort.direction==='asc'?' ↑':' ↓'):''}</button></th>)}<th scope="col">Owner</th></tr></thead><tbody>{rows.items.map(task=><tr key={task.id}>{renderSelection&&<td>{renderSelection(task)}</td>}<th scope="row"><button className="text-button" onClick={()=>navigate('tasks',task.id)}>{task.title}</button><small className="task-id">{task.id}</small></th><td><span className={'status status-'+task.status}>{statusLabel(task.status)}</span></td><td>{task.priority}</td><td>{formatDate(task.dueDate)}</td><td>{task.estimate}</td><td>{memberName(state,task.assignee)}</td></tr>)}</tbody></table>{!rows.total&&<p className="empty">No tasks match these filters. Clear filters or create a task.</p>}</div>;}
+import { useState } from 'react';
+import { useWorkshop } from './store';
+import { filterTasks } from './shared/filters';
+import { sortTasks } from './shared/sorting';
+import { paginate } from './shared/pagination';
+import { statusLabel } from './shared/status';
+import { memberName } from './shared/members';
+import { formatDate } from './shared/dates';
+export default function TaskTable({ renderSelection }) {
+  const { state, filters, page, navigate } = useWorkshop();
+  const [sort, setSort] = useState({ key: 'dueDate', direction: 'asc' });
+  const rows = paginate(
+    sortTasks(
+      filterTasks(state, filters).filter(
+        (task) => state.preferences.showCompleted || task.status !== 'done'
+      ),
+      sort.key,
+      sort.direction
+    ),
+    page,
+    6
+  );
+  function change(key) {
+    setSort({ key, direction: sort.key === key && sort.direction === 'asc' ? 'desc' : 'asc' });
+  }
+  return (
+    <div className="table-scroll">
+      <table>
+        <caption>Release tasks ({rows.total} matching)</caption>
+        <thead>
+          <tr>
+            {renderSelection && <th scope="col">Select</th>}
+            {[
+              ['title', 'Task'],
+              ['status', 'Status'],
+              ['priority', 'Priority'],
+              ['dueDate', 'Due date'],
+              ['estimate', 'Points']
+            ].map(([key, label]) => (
+              <th
+                scope="col"
+                key={key}
+                aria-sort={
+                  sort.key === key
+                    ? sort.direction === 'asc'
+                      ? 'ascending'
+                      : 'descending'
+                    : 'none'
+                }
+              >
+                <button onClick={() => change(key)}>
+                  {label}
+                  {sort.key === key ? (sort.direction === 'asc' ? ' ↑' : ' ↓') : ''}
+                </button>
+              </th>
+            ))}
+            <th scope="col">Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.items.map((task) => (
+            <tr key={task.id}>
+              {renderSelection && <td>{renderSelection(task)}</td>}
+              <th scope="row">
+                <button className="text-button" onClick={() => navigate('tasks', task.id)}>
+                  {task.title}
+                </button>
+                <small className="task-id">{task.id}</small>
+              </th>
+              <td>
+                <span className={'status status-' + task.status}>{statusLabel(task.status)}</span>
+              </td>
+              <td>{task.priority}</td>
+              <td>{formatDate(task.dueDate)}</td>
+              <td>{task.estimate}</td>
+              <td>{memberName(state, task.assignee)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {!rows.total && (
+        <p className="empty">No tasks match these filters. Clear filters or create a task.</p>
+      )}
+    </div>
+  );
+}

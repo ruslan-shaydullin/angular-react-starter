@@ -1,1 +1,21 @@
-{"name":"paired-release-workshop","version":"1.0.0","private":true,"scripts":{"shared":"node scripts/sync-shared.cjs","test":"node scripts/test-shared.cjs","check":"tsc -p shared/tsconfig.json --noEmit","install:apps":"npm ci --prefix angular && npm ci --prefix react"},"devDependencies":{"typescript":"4.7.4"},"engines":{"node":">=16"}}
+{
+  "name": "paired-release-workshop",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "shared": "node scripts/sync-shared.cjs",
+    "test": "node scripts/test-shared.cjs",
+    "check": "tsc -p shared/tsconfig.json --noEmit",
+    "install:apps": "npm ci --prefix angular && npm ci --prefix react",
+    "format": "prettier --write \"shared/*.{ts,css,json}\" \"scripts/*.cjs\" \"tests/*.cjs\" \"react/src/**/*.{js,css}\" \"angular/src/app/**/*.{ts,html}\"",
+    "format:check": "prettier --check \"shared/*.{ts,css,json}\" \"scripts/*.cjs\" \"tests/*.cjs\" \"react/src/**/*.{js,css}\" \"angular/src/app/**/*.{ts,html}\"",
+    "parity": "node scripts/check-parity.cjs"
+  },
+  "devDependencies": {
+    "typescript": "4.7.4",
+    "prettier": "2.7.1"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

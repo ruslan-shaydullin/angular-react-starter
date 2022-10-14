@@ -1,3 +1,30 @@
-import {Component} from 'react';
-export default function EmptyState({title,description,onAction,action}){return <section className="empty panel"><h2>{title}</h2><p>{description}</p>{onAction&&<button onClick={onAction}>{action}</button>}</section>;}
-export class WorkshopBoundary extends Component{state={failed:false};static getDerivedStateFromError(){return {failed:true};}render(){if(this.state.failed)return <section className="panel error" role="alert"><h1>Workspace could not render</h1><p>Reload this page to restore the last saved workspace. If a newly imported snapshot caused the problem, preserve an exported copy before clearing browser data.</p><button onClick={()=>window.location.reload()}>Reload workspace</button></section>;return this.props.children;}}
+import { Component } from 'react';
+export default function EmptyState({ title, description, onAction, action }) {
+  return (
+    <section className="empty panel">
+      <h2>{title}</h2>
+      <p>{description}</p>
+      {onAction && <button onClick={onAction}>{action}</button>}
+    </section>
+  );
+}
+export class WorkshopBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    if (this.state.failed)
+      return (
+        <section className="panel error" role="alert">
+          <h1>Workspace could not render</h1>
+          <p>
+            Reload this page to restore the last saved workspace. If a newly imported snapshot
+            caused the problem, preserve an exported copy before clearing browser data.
+          </p>
+          <button onClick={() => window.location.reload()}>Reload workspace</button>
+        </section>
+      );
+    return this.props.children;
+  }
+}

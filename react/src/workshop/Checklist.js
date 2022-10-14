@@ -1,2 +1,42 @@
-import {useState} from 'react';import {useWorkshop} from './store';
-export default function Checklist({task}){const {dispatch}=useWorkshop();const [text,setText]=useState('');function add(event){event.preventDefault();if(dispatch('checklist.add',{id:task.id,text}))setText('');}return <section className="detail-section"><h3>Acceptance checklist</h3><p>{task.checklist.filter(item=>item.done).length} of {task.checklist.length} complete</p><ul className="plain-list">{task.checklist.map(item=><li key={item.id}><label className="check-label"><input type="checkbox" checked={item.done} disabled={task.archived||task.status==='done'} onChange={()=>dispatch('checklist.toggle',{id:task.id,itemId:item.id})}/>{item.text}</label></li>)}</ul><form onSubmit={add} className="row"><label>New checklist item<input value={text} onChange={event=>setText(event.target.value)} maxLength={200}/></label><button type="submit" disabled={task.archived||task.status==='done'}>Add item</button></form></section>;}
+import { useState } from 'react';
+import { useWorkshop } from './store';
+export default function Checklist({ task }) {
+  const { dispatch } = useWorkshop();
+  const [text, setText] = useState('');
+  function add(event) {
+    event.preventDefault();
+    if (dispatch('checklist.add', { id: task.id, text })) setText('');
+  }
+  return (
+    <section className="detail-section">
+      <h3>Acceptance checklist</h3>
+      <p>
+        {task.checklist.filter((item) => item.done).length} of {task.checklist.length} complete
+      </p>
+      <ul className="plain-list">
+        {task.checklist.map((item) => (
+          <li key={item.id}>
+            <label className="check-label">
+              <input
+                type="checkbox"
+                checked={item.done}
+                disabled={task.archived || task.status === 'done'}
+                onChange={() => dispatch('checklist.toggle', { id: task.id, itemId: item.id })}
+              />
+              {item.text}
+            </label>
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={add} className="row">
+        <label>
+          New checklist item
+          <input value={text} onChange={(event) => setText(event.target.value)} maxLength={200} />
+        </label>
+        <button type="submit" disabled={task.archived || task.status === 'done'}>
+          Add item
+        </button>
+      </form>
+    </section>
+  );
+}

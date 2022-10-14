@@ -1,1 +1,8 @@
-<div class="row undo-controls" aria-label="Workspace history"><button [disabled]="!s.history.past.length" (click)="s.undo()">Undo change</button><button [disabled]="!s.history.future.length" (click)="s.redo()">Redo change</button><small>{{s.history.past.length}} changes available to undo. History resets when the page reloads.</small></div>
+<div class="row undo-controls" aria-label="Workspace history">
+  <button [disabled]="!s.history.past.length" (click)="s.undo()">Undo change</button
+  ><button [disabled]="!s.history.future.length" (click)="s.redo()">Redo change</button
+  ><small
+    >{{ s.history.past.length }} changes available to undo. History resets when the page
+    reloads.</small
+  >
+</div>

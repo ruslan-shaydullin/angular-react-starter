@@ -1,3 +1,21 @@
-import {setup,settle,button,control,change} from './test-helpers';
+import { setup, settle, button, control, change } from './test-helpers';
 
-describe('Task search',()=>{it('narrows matching rows and clears back to the full list',async()=>{const {fixture,element}=await setup();change(control(element,'Search tasks'),'queue');await settle(fixture);expect(element.textContent).toContain('Showing 1–1 of 1 tasks');expect(button(element,'Add queue depth dashboard')).toBeTruthy();button(element,'Clear filters (1)').click();await settle(fixture);expect(element.textContent).toContain('Showing 1–6 of 12 tasks');});it('provides recovery text when search matches nothing',async()=>{const {fixture,element}=await setup();change(control(element,'Search tasks'),'unmatched query');await settle(fixture);expect(element.textContent).toContain('No tasks match these filters');expect(button(element,'Next page').disabled).toBeTrue();});});
+describe('Task search', () => {
+  it('narrows matching rows and clears back to the full list', async () => {
+    const { fixture, element } = await setup();
+    change(control(element, 'Search tasks'), 'queue');
+    await settle(fixture);
+    expect(element.textContent).toContain('Showing 1–1 of 1 tasks');
+    expect(button(element, 'Add queue depth dashboard')).toBeTruthy();
+    button(element, 'Clear filters (1)').click();
+    await settle(fixture);
+    expect(element.textContent).toContain('Showing 1–6 of 12 tasks');
+  });
+  it('provides recovery text when search matches nothing', async () => {
+    const { fixture, element } = await setup();
+    change(control(element, 'Search tasks'), 'unmatched query');
+    await settle(fixture);
+    expect(element.textContent).toContain('No tasks match these filters');
+    expect(button(element, 'Next page').disabled).toBeTrue();
+  });
+});

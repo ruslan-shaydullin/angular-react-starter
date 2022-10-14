@@ -1,8 +1,60 @@
-const {assert,fresh,now,freeze,apply,reject,test}=require('./helpers.cjs');
-const {exportSnapshot}=require('../.shared-build/snapshot-export');const {importSnapshot}=require('../.shared-build/snapshot-import');const {loadWorkspace,persistWorkspace}=require('../.shared-build/persistence');
+const { assert, fresh, now, freeze, apply, reject, test } = require('./helpers.cjs');
+const { exportSnapshot } = require('../.shared-build/snapshot-export');
+const { importSnapshot } = require('../.shared-build/snapshot-import');
+const { loadWorkspace, persistWorkspace } = require('../.shared-build/persistence');
 
-test('snapshot roundtrip preserves workspace and returns independent data',()=>{const state=freeze(fresh());const result=importSnapshot(exportSnapshot(state,now),fresh());assert.equal(result.ok,true,result.errors.join('; '));assert.deepEqual(result.value,state);assert.notEqual(result.value.tasks,state.tasks);});
-test('strict snapshot task types cannot be coerced through form validation',()=>{for(const patch of [{estimate:'5'},{description:123},{assignee:123},{dueDate:123},{title:null}]){const state=fresh();Object.assign(state.tasks[0],patch);const result=importSnapshot(exportSnapshot(state,now),fresh());assert.equal(result.ok,false,JSON.stringify(patch));}});
-test('rejects null nested rows duplicate ids and cyclic graphs without throwing',()=>{for(const mutate of [state=>state.tasks[0].comments=[null],state=>state.tasks[1].id=state.tasks[0].id,state=>state.tasks[0].dependsOn=['T-102'],state=>state.preferences.density='tiny',state=>state.milestones[0].taskIds=['T-106']]){const state=fresh();mutate(state);assert.equal(importSnapshot(exportSnapshot(state,now),fresh()).ok,false);}});
-test('unsupported envelopes and malformed JSON preserve current workspace',()=>{const state=fresh();for(const text of ['{','{}','null','{"format":"release-workshop","version":2}']){const result=importSnapshot(text,state);assert.equal(result.ok,false);assert.equal(result.value,state);}});
-test('storage failures return actionable errors instead of throwing',()=>{const storage={getItem(){throw Error('denied');},setItem(){throw Error('quota');}};const state=fresh();assert.equal(loadWorkspace(storage,state).value,state);assert.match(persistWorkspace(storage,state,now).errors[0],/Export/);});
+test('snapshot roundtrip preserves workspace and returns independent data', () => {
+  const state = freeze(fresh());
+  const result = importSnapshot(exportSnapshot(state, now), fresh());
+  assert.equal(result.ok, true, result.errors.join('; '));
+  assert.deepEqual(result.value, state);
+  assert.notEqual(result.value.tasks, state.tasks);
+});
+test('strict snapshot task types cannot be coerced through form validation', () => {
+  for (const patch of [
+    { estimate: '5' },
+    { description: 123 },
+    { assignee: 123 },
+    { dueDate: 123 },
+    { title: null }
+  ]) {
+    const state = fresh();
+    Object.assign(state.tasks[0], patch);
+    const result = importSnapshot(exportSnapshot(state, now), fresh());
+    assert.equal(result.ok, false, JSON.stringify(patch));
+  }
+});
+test('rejects null nested rows duplicate ids and cyclic graphs without throwing', () => {
+  for (const mutate of [
+    (state) => (state.tasks[0].comments = [null]),
+    (state) => (state.tasks[1].id = state.tasks[0].id),
+    (state) => (state.tasks[0].dependsOn = ['T-102']),
+    (state) => (state.preferences.density = 'tiny'),
+    (state) => (state.milestones[0].taskIds = ['T-106'])
+  ]) {
+    const state = fresh();
+    mutate(state);
+    assert.equal(importSnapshot(exportSnapshot(state, now), fresh()).ok, false);
+  }
+});
+test('unsupported envelopes and malformed JSON preserve current workspace', () => {
+  const state = fresh();
+  for (const text of ['{', '{}', 'null', '{"format":"release-workshop","version":2}']) {
+    const result = importSnapshot(text, state);
+    assert.equal(result.ok, false);
+    assert.equal(result.value, state);
+  }
+});
+test('storage failures return actionable errors instead of throwing', () => {
+  const storage = {
+    getItem() {
+      throw Error('denied');
+    },
+    setItem() {
+      throw Error('quota');
+    }
+  };
+  const state = fresh();
+  assert.equal(loadWorkspace(storage, state).value, state);
+  assert.match(persistWorkspace(storage, state, now).errors[0], /Export/);
+});

@@ -1,1 +1,51 @@
-<div class="table-scroll"><table><caption>Release tasks ({{rows.total}} matching)</caption><thead><tr><th *ngIf="selectable" scope="col">Select</th><th *ngFor="let column of columns" scope="col" [attr.aria-sort]="key===column.key?(direction==='asc'?'ascending':'descending'):'none'"><button (click)="change(column.key)">{{column.label}}{{key===column.key?(direction==='asc'?' ↑':' ↓'):''}}</button></th><th scope="col">Owner</th></tr></thead><tbody><tr *ngFor="let task of rows.items;trackBy:trackTask"><td *ngIf="selectable"><ng-container *ngTemplateOutlet="selectionTemplate;context:{$implicit:task}"></ng-container></td><th scope="row"><button class="text-button" (click)="s.navigate('tasks',task.id)">{{task.title}}</button><small class="task-id">{{task.id}}</small></th><td><span [class]="'status status-'+task.status">{{statusLabel(task.status)}}</span></td><td>{{task.priority}}</td><td>{{formatDate(task.dueDate)}}</td><td>{{task.estimate}}</td><td>{{memberName(s.state,task.assignee)}}</td></tr></tbody></table><p *ngIf="!rows.total" class="empty">No tasks match these filters. Clear filters or create a task.</p></div>
+<div class="table-scroll">
+  <table>
+    <caption>
+      Release tasks ({{
+        rows.total
+      }}
+      matching)
+    </caption>
+    <thead>
+      <tr>
+        <th *ngIf="selectable" scope="col">Select</th>
+        <th
+          *ngFor="let column of columns"
+          scope="col"
+          [attr.aria-sort]="
+            key === column.key ? (direction === 'asc' ? 'ascending' : 'descending') : 'none'
+          "
+        >
+          <button (click)="change(column.key)">
+            {{ column.label }}{{ key === column.key ? (direction === 'asc' ? ' ↑' : ' ↓') : '' }}
+          </button>
+        </th>
+        <th scope="col">Owner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of rows.items; trackBy: trackTask">
+        <td *ngIf="selectable">
+          <ng-container
+            *ngTemplateOutlet="selectionTemplate; context: { $implicit: task }"
+          ></ng-container>
+        </td>
+        <th scope="row">
+          <button class="text-button" (click)="s.navigate('tasks', task.id)">
+            {{ task.title }}</button
+          ><small class="task-id">{{ task.id }}</small>
+        </th>
+        <td>
+          <span [class]="'status status-' + task.status">{{ statusLabel(task.status) }}</span>
+        </td>
+        <td>{{ task.priority }}</td>
+        <td>{{ formatDate(task.dueDate) }}</td>
+        <td>{{ task.estimate }}</td>
+        <td>{{ memberName(s.state, task.assignee) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!rows.total" class="empty">
+    No tasks match these filters. Clear filters or create a task.
+  </p>
+</div>

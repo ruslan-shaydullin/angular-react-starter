@@ -1,1 +1,34 @@
-<section class="panel"><h2>Capacity and current commitments</h2><p>Only active, unfinished work counts toward capacity.</p><div class="table-scroll"><table><caption>Team workload in relative points</caption><thead><tr><th scope="col">Person</th><th scope="col">Committed</th><th scope="col">Capacity</th><th scope="col">Assessment</th></tr></thead><tbody><tr *ngFor="let member of members"><th scope="row">{{member.name}}</th><td>{{member.points}}</td><td>{{member.capacity}}</td><td>{{member.overBy?member.overBy+' points over capacity':member.available+' points available'}}<span *ngIf="member.unestimated">; {{member.unestimated}} tasks unestimated</span></td></tr></tbody></table></div><p>{{unassigned.tasks.length}} unassigned tasks account for {{unassigned.points}} points.</p></section>
+<section class="panel">
+  <h2>Capacity and current commitments</h2>
+  <p>Only active, unfinished work counts toward capacity.</p>
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Team workload in relative points
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Person</th>
+          <th scope="col">Committed</th>
+          <th scope="col">Capacity</th>
+          <th scope="col">Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of members">
+          <th scope="row">{{ member.name }}</th>
+          <td>{{ member.points }}</td>
+          <td>{{ member.capacity }}</td>
+          <td>
+            {{
+              member.overBy
+                ? member.overBy + ' points over capacity'
+                : member.available + ' points available'
+            }}<span *ngIf="member.unestimated">; {{ member.unestimated }} tasks unestimated</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>{{ unassigned.tasks.length }} unassigned tasks account for {{ unassigned.points }} points.</p>
+</section>

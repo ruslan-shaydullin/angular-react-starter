@@ -1,1 +1,19 @@
-<section class="panel"><h2>Needs attention</h2><p class="muted">Evaluated against the workshop date, 8 July 2022.</p><p *ngIf="!notices.length">No overdue tasks, missing owners, or capacity warnings.</p><ul class="notification-list"><li *ngFor="let notice of notices"><span [class]="'severity '+notice.severity">{{notice.severity==='warning'?'Review':'Assign'}}</span><button *ngIf="notice.taskId" class="text-button" (click)="s.navigate('tasks',notice.taskId)">{{notice.text}}</button><span *ngIf="!notice.taskId">{{notice.text}}</span></li></ul></section>
+<section class="panel">
+  <h2>Needs attention</h2>
+  <p class="muted">Evaluated against the workshop date, 8 July 2022.</p>
+  <p *ngIf="!notices.length">No overdue tasks, missing owners, or capacity warnings.</p>
+  <ul class="notification-list">
+    <li *ngFor="let notice of notices">
+      <span [class]="'severity ' + notice.severity">{{
+        notice.severity === 'warning' ? 'Review' : 'Assign'
+      }}</span
+      ><button
+        *ngIf="notice.taskId"
+        class="text-button"
+        (click)="s.navigate('tasks', notice.taskId)"
+      >
+        {{ notice.text }}</button
+      ><span *ngIf="!notice.taskId">{{ notice.text }}</span>
+    </li>
+  </ul>
+</section>

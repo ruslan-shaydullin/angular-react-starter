@@ -1,4 +1,14 @@
-import {screen,fireEvent,within} from '@testing-library/react';
-import {renderWorkshop,storedWorkspace,changeRoute,openTask} from './testHelpers';
+import { screen, fireEvent } from '@testing-library/react';
+import { renderWorkshop } from './testHelpers';
 
-test('invalid minutes remain visible and successful correction updates the total',async()=>{const {user}=renderWorkshop('#/tasks/T-103');fireEvent.change(screen.getByLabelText('Minutes worked'),{target:{value:'-5'}});await user.click(screen.getByRole('button',{name:'Record time'}));expect(screen.getByRole('alert')).toHaveTextContent('1 to 1,440 whole minutes');expect(screen.getByLabelText('Minutes worked')).toHaveValue(-5);fireEvent.change(screen.getByLabelText('Minutes worked'),{target:{value:'90'}});await user.type(screen.getByLabelText('Time note'),'Dashboard review');await user.click(screen.getByRole('button',{name:'Record time'}));expect(screen.getByRole('heading',{name:'Time recorded: 1h 30m'})).toBeInTheDocument();});
+test('invalid minutes remain visible and successful correction updates the total', async () => {
+  const { user } = renderWorkshop('#/tasks/T-103');
+  fireEvent.change(screen.getByLabelText('Minutes worked'), { target: { value: '-5' } });
+  await user.click(screen.getByRole('button', { name: 'Record time' }));
+  expect(screen.getByRole('alert')).toHaveTextContent('1 to 1,440 whole minutes');
+  expect(screen.getByLabelText('Minutes worked')).toHaveValue(-5);
+  fireEvent.change(screen.getByLabelText('Minutes worked'), { target: { value: '90' } });
+  await user.type(screen.getByLabelText('Time note'), 'Dashboard review');
+  await user.click(screen.getByRole('button', { name: 'Record time' }));
+  expect(screen.getByRole('heading', { name: 'Time recorded: 1h 30m' })).toBeInTheDocument();
+});

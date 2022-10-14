@@ -1,1 +1,39 @@
-<section class="panel"><h2>Release milestones</h2><ul><li *ngFor="let item of s.state.milestones"><strong>{{item.name}}</strong> — {{formatDate(item.dueDate)}} ({{item.taskIds.length}} tasks)</li></ul><details><summary>Plan a milestone</summary><form (ngSubmit)="save()" novalidate class="stack"><label>Milestone name<input name="name" [(ngModel)]="draft.name"></label><label>Milestone project<select name="projectId" [(ngModel)]="draft.projectId" (ngModelChange)="projectChanged()"><option *ngFor="let project of s.state.projects" [value]="project.id">{{project.name}}</option></select></label><label>Milestone date<input type="date" name="dueDate" [(ngModel)]="draft.dueDate"></label><fieldset><legend>Included tasks</legend><label class="check-label" *ngFor="let task of tasks"><input type="checkbox" [checked]="draft.taskIds.includes(task.id)" (change)="toggle(task.id,$any($event.target).checked)">{{task.title}}</label></fieldset><button>Save milestone</button></form></details></section>
+<section class="panel">
+  <h2>Release milestones</h2>
+  <ul>
+    <li *ngFor="let item of s.state.milestones">
+      <strong>{{ item.name }}</strong> — {{ formatDate(item.dueDate) }} ({{
+        item.taskIds.length
+      }}
+      tasks)
+    </li>
+  </ul>
+  <details>
+    <summary>Plan a milestone</summary>
+    <form (ngSubmit)="save()" novalidate class="stack">
+      <label>Milestone name<input name="name" [(ngModel)]="draft.name" /></label
+      ><label
+        >Milestone project<select
+          name="projectId"
+          [(ngModel)]="draft.projectId"
+          (ngModelChange)="projectChanged()"
+        >
+          <option *ngFor="let project of s.state.projects" [value]="project.id">
+            {{ project.name }}
+          </option>
+        </select></label
+      ><label>Milestone date<input type="date" name="dueDate" [(ngModel)]="draft.dueDate" /></label>
+      <fieldset>
+        <legend>Included tasks</legend>
+        <label class="check-label" *ngFor="let task of tasks"
+          ><input
+            type="checkbox"
+            [checked]="draft.taskIds.includes(task.id)"
+            (change)="toggle(task.id, $any($event.target).checked)"
+          />{{ task.title }}</label
+        >
+      </fieldset>
+      <button>Save milestone</button>
+    </form>
+  </details>
+</section>

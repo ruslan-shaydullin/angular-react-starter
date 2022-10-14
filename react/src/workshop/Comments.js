@@ -1,2 +1,53 @@
-import {useState} from 'react';import {useWorkshop} from './store';import {memberName} from './shared/members';
-export default function Comments({task}){const {state,dispatch}=useWorkshop();const [text,setText]=useState(''),[author,setAuthor]=useState(state.members[0]?.id||'');function add(event){event.preventDefault();if(dispatch('comment.add',{id:task.id,text,author}))setText('');}return <section className="detail-section"><h3>Discussion</h3><ol className="comments">{task.comments.map(comment=><li key={comment.id}><strong>{memberName(state,comment.author)}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleString()}</time><p>{comment.text}</p></li>)}</ol>{!task.comments.length&&<p className="muted">Record a review decision or ask for context.</p>}<form onSubmit={add} className="stack"><label>Comment author<select value={author} onChange={event=>setAuthor(event.target.value)}>{state.members.map(member=><option key={member.id} value={member.id}>{member.name}</option>)}</select></label><label>New comment<textarea value={text} onChange={event=>setText(event.target.value)} maxLength={1000} rows={3}/></label><button disabled={task.archived} type="submit">Add comment</button></form></section>;}
+import { useState } from 'react';
+import { useWorkshop } from './store';
+import { memberName } from './shared/members';
+export default function Comments({ task }) {
+  const { state, dispatch } = useWorkshop();
+  const [text, setText] = useState(''),
+    [author, setAuthor] = useState(state.members[0]?.id || '');
+  function add(event) {
+    event.preventDefault();
+    if (dispatch('comment.add', { id: task.id, text, author })) setText('');
+  }
+  return (
+    <section className="detail-section">
+      <h3>Discussion</h3>
+      <ol className="comments">
+        {task.comments.map((comment) => (
+          <li key={comment.id}>
+            <strong>{memberName(state, comment.author)}</strong>
+            <time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleString()}</time>
+            <p>{comment.text}</p>
+          </li>
+        ))}
+      </ol>
+      {!task.comments.length && (
+        <p className="muted">Record a review decision or ask for context.</p>
+      )}
+      <form onSubmit={add} className="stack">
+        <label>
+          Comment author
+          <select value={author} onChange={(event) => setAuthor(event.target.value)}>
+            {state.members.map((member) => (
+              <option key={member.id} value={member.id}>
+                {member.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          New comment
+          <textarea
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            maxLength={1000}
+            rows={3}
+          />
+        </label>
+        <button disabled={task.archived} type="submit">
+          Add comment
+        </button>
+      </form>
+    </section>
+  );
+}

@@ -1,0 +1,8 @@
+node_modules
+angular/src/workshop/shared
+react/src/workshop/shared
+react/src/workshop/workshop.css
+react/src/app.css
+angular/src/app/app.component.css
+angular/dist
+react/build

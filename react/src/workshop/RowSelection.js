@@ -1,3 +1,28 @@
-import {useWorkshop} from './store';import {toggleSelection,selectVisible,selectionState} from './shared/selection';
-export default function RowSelection({task}){const {selected,setSelected}=useWorkshop();return <input className="selection-box" type="checkbox" aria-label={'Select '+task.title} disabled={task.archived} checked={selected.includes(task.id)} onChange={()=>setSelected(ids=>toggleSelection(ids,task.id))}/>;}
-export function SelectVisible({tasks}){const {selected,setSelected}=useWorkshop();const state=selectionState(selected,tasks);return <button disabled={!tasks.length} aria-pressed={state==='all'} onClick={()=>setSelected(ids=>selectVisible(ids,tasks))}>{state==='all'?'Deselect matching tasks':'Select matching tasks'}</button>;}
+import { useWorkshop } from './store';
+import { toggleSelection, selectVisible, selectionState } from './shared/selection';
+export default function RowSelection({ task }) {
+  const { selected, setSelected } = useWorkshop();
+  return (
+    <input
+      className="selection-box"
+      type="checkbox"
+      aria-label={'Select ' + task.title}
+      disabled={task.archived}
+      checked={selected.includes(task.id)}
+      onChange={() => setSelected((ids) => toggleSelection(ids, task.id))}
+    />
+  );
+}
+export function SelectVisible({ tasks }) {
+  const { selected, setSelected } = useWorkshop();
+  const state = selectionState(selected, tasks);
+  return (
+    <button
+      disabled={!tasks.length}
+      aria-pressed={state === 'all'}
+      onClick={() => setSelected((ids) => selectVisible(ids, tasks))}
+    >
+      {state === 'all' ? 'Deselect matching tasks' : 'Select matching tasks'}
+    </button>
+  );
+}

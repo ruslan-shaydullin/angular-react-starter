@@ -1,1 +1,33 @@
-<section class="panel"><h2>Preview an import</h2><p>CSV adds tasks. A snapshot replaces the workspace and can be undone during this session.</p><div class="stack"><label>Import format<select [(ngModel)]="mode" (ngModelChange)="preview=null"><option value="csv">Task CSV</option><option value="json">Workspace snapshot</option></select></label><label>Import text<textarea rows="7" [(ngModel)]="text" (ngModelChange)="preview=null" spellcheck="false"></textarea></label><button (click)="inspect()">Preview import</button><div *ngIf="preview" aria-live="polite"><p *ngIf="preview.ok">{{preview.count}} tasks passed validation. Review the selected format before applying.</p><ul *ngIf="!preview.ok" class="error"><li *ngFor="let error of preview.errors">{{error}}</li></ul><button [disabled]="!preview.ok||preview.revision!==s.state.revision" (click)="apply()">{{mode==='csv'?'Import tasks':'Replace workspace'}}</button><p *ngIf="preview.revision!==s.state.revision">Workspace changed. Preview the import again.</p></div></div></section>
+<section class="panel">
+  <h2>Preview an import</h2>
+  <p>CSV adds tasks. A snapshot replaces the workspace and can be undone during this session.</p>
+  <div class="stack">
+    <label
+      >Import format<select [(ngModel)]="mode" (ngModelChange)="preview = null">
+        <option value="csv">Task CSV</option>
+        <option value="json">Workspace snapshot</option>
+      </select></label
+    ><label
+      >Import text<textarea
+        rows="7"
+        [(ngModel)]="text"
+        (ngModelChange)="preview = null"
+        spellcheck="false"
+      ></textarea></label
+    ><button (click)="inspect()">Preview import</button>
+    <div *ngIf="preview" aria-live="polite">
+      <p *ngIf="preview.ok">
+        {{ preview.count }} tasks passed validation. Review the selected format before applying.
+      </p>
+      <ul *ngIf="!preview.ok" class="error">
+        <li *ngFor="let error of preview.errors">{{ error }}</li>
+      </ul>
+      <button [disabled]="!preview.ok || preview.revision !== s.state.revision" (click)="apply()">
+        {{ mode === 'csv' ? 'Import tasks' : 'Replace workspace' }}
+      </button>
+      <p *ngIf="preview.revision !== s.state.revision">
+        Workspace changed. Preview the import again.
+      </p>
+    </div>
+  </div>
+</section>

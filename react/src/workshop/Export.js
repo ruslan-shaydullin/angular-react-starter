@@ -1,3 +1,52 @@
-import {useWorkshop} from './store';import {exportCsv,csvFilename} from './shared/csv-export';import {exportSnapshot} from './shared/snapshot-export';import {filterTasks} from './shared/filters';import {DEMO_DATE} from './shared/types';
-export function downloadText(text,name,type){const url=URL.createObjectURL(new Blob([text],{type}));const link=document.createElement('a');link.href=url;link.download=name;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-export default function Export(){const {state,filters}=useWorkshop();return <section className="panel"><h2>Export workshop data</h2><p>CSV includes tasks matching the current filters. Snapshots include the entire workspace, comments, and preferences.</p><div className="row"><button onClick={()=>downloadText(exportCsv(filterTasks(state,filters)),csvFilename(DEMO_DATE),'text/csv;charset=utf-8')}>Download task CSV</button><button onClick={()=>downloadText(exportSnapshot(state,new Date().toISOString()),'release-workshop.json','application/json')}>Download workspace snapshot</button></div><p className="muted">Spreadsheet formula-like text is escaped in CSV exports.</p></section>;}
+import { useWorkshop } from './store';
+import { exportCsv, csvFilename } from './shared/csv-export';
+import { exportSnapshot } from './shared/snapshot-export';
+import { filterTasks } from './shared/filters';
+import { DEMO_DATE } from './shared/types';
+export function downloadText(text, name, type) {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = name;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+export default function Export() {
+  const { state, filters } = useWorkshop();
+  return (
+    <section className="panel">
+      <h2>Export workshop data</h2>
+      <p>
+        CSV includes tasks matching the current filters. Snapshots include the entire workspace,
+        comments, and preferences.
+      </p>
+      <div className="row">
+        <button
+          onClick={() =>
+            downloadText(
+              exportCsv(filterTasks(state, filters)),
+              csvFilename(DEMO_DATE),
+              'text/csv;charset=utf-8'
+            )
+          }
+        >
+          Download task CSV
+        </button>
+        <button
+          onClick={() =>
+            downloadText(
+              exportSnapshot(state, new Date().toISOString()),
+              'release-workshop.json',
+              'application/json'
+            )
+          }
+        >
+          Download workspace snapshot
+        </button>
+      </div>
+      <p className="muted">Spreadsheet formula-like text is escaped in CSV exports.</p>
+    </section>
+  );
+}

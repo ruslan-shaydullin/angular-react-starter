@@ -1,1 +1,19 @@
-<section class="panel"><h2>Workspace activity</h2><p>Successful changes appear here. Undo restores the previous activity along with its data.</p><p *ngIf="!s.state.activity.length" class="empty">Create a task or record a review to start the activity log.</p><section *ngFor="let group of groups"><h3>{{formatDate(group.date)}}</h3><ol class="activity-list"><li *ngFor="let item of group.items"><time [attr.datetime]="item.at">{{item.at|date:'shortTime'}}</time><span>{{item.text}}</span><button *ngIf="item.taskId" class="text-button" (click)="s.navigate('tasks',item.taskId)">{{item.taskId}}</button></li></ol></section></section>
+<section class="panel">
+  <h2>Workspace activity</h2>
+  <p>Successful changes appear here. Undo restores the previous activity along with its data.</p>
+  <p *ngIf="!s.state.activity.length" class="empty">
+    Create a task or record a review to start the activity log.
+  </p>
+  <section *ngFor="let group of groups">
+    <h3>{{ formatDate(group.date) }}</h3>
+    <ol class="activity-list">
+      <li *ngFor="let item of group.items">
+        <time [attr.datetime]="item.at">{{ item.at | date: 'shortTime' }}</time
+        ><span>{{ item.text }}</span
+        ><button *ngIf="item.taskId" class="text-button" (click)="s.navigate('tasks', item.taskId)">
+          {{ item.taskId }}
+        </button>
+      </li>
+    </ol>
+  </section>
+</section>

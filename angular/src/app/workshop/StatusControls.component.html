@@ -1,1 +1,14 @@
-<section class="detail-section"><h3>Workflow</h3><label>Task status<select [disabled]="task.archived" [ngModel]="task.status" (ngModelChange)="s.dispatch('task.status',{id:task.id,status:$event})"><option *ngFor="let status of statuses" [value]="status">{{statusLabel(status)}}</option></select></label><p *ngIf="relations.blocked" class="notice">Finish dependencies before marking this task done.</p><p class="muted">Checklist items must also be complete before a task can finish.</p></section>
+<section class="detail-section">
+  <h3>Workflow</h3>
+  <label
+    >Task status<select
+      [disabled]="task.archived"
+      [ngModel]="task.status"
+      (ngModelChange)="s.dispatch('task.status', { id: task.id, status: $event })"
+    >
+      <option *ngFor="let status of statuses" [value]="status">{{ statusLabel(status) }}</option>
+    </select></label
+  >
+  <p *ngIf="relations.blocked" class="notice">Finish dependencies before marking this task done.</p>
+  <p class="muted">Checklist items must also be complete before a task can finish.</p>
+</section>

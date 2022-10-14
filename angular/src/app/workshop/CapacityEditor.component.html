@@ -1,1 +1,22 @@
-<section class="panel"><h2>Plan available capacity</h2><p>Use zero for an unavailable person. Capacity does not automatically reassign their tasks.</p><div class="stack"><form class="row" *ngFor="let member of s.state.members" (ngSubmit)="save(member.id,member.capacity)" novalidate><label>{{member.name}} capacity<input type="number" name="capacity" min="0" max="100" [ngModel]="value(member.id,member.capacity)" (ngModelChange)="values[member.id]=$event"></label><button type="submit">Save capacity for {{member.name.split(' ')[0]}}</button></form></div></section>
+<section class="panel">
+  <h2>Plan available capacity</h2>
+  <p>Use zero for an unavailable person. Capacity does not automatically reassign their tasks.</p>
+  <div class="stack">
+    <form
+      class="row"
+      *ngFor="let member of s.state.members"
+      (ngSubmit)="save(member.id, member.capacity)"
+      novalidate
+    >
+      <label
+        >{{ member.name }} capacity<input
+          type="number"
+          name="capacity"
+          min="0"
+          max="100"
+          [ngModel]="value(member.id, member.capacity)"
+          (ngModelChange)="values[member.id] = $event" /></label
+      ><button type="submit">Save capacity for {{ member.name.split(' ')[0] }}</button>
+    </form>
+  </div>
+</section>

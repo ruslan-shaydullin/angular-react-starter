@@ -1,3 +1,28 @@
-import {setup,settle,button,control,change} from './test-helpers';
+import { setup, settle, button, control, change } from './test-helpers';
 
-describe('Import preview',()=>{it('rejects a malformed CSV header before application',async()=>{const {fixture,element,store}=await setup('#/settings');change(control(element,'Import text'),'wrong,header');await settle(fixture);button(element,'Preview import').click();await settle(fixture);expect(element.textContent).toContain('CSV header must match');expect(button(element,'Import tasks').disabled).toBeTrue();expect(store.state.tasks.length).toBe(12);});it('invalidates a preview when text changes',async()=>{const {fixture,element}=await setup('#/settings');change(control(element,'Import text'),'title,description,status,priority,projectId,assignee,dueDate,estimate');await settle(fixture);button(element,'Preview import').click();await settle(fixture);expect(button(element,'Import tasks').disabled).toBeFalse();change(control(element,'Import text'),'changed');await settle(fixture);expect(element.textContent).not.toContain('passed validation');});});
+describe('Import preview', () => {
+  it('rejects a malformed CSV header before application', async () => {
+    const { fixture, element, store } = await setup('#/settings');
+    change(control(element, 'Import text'), 'wrong,header');
+    await settle(fixture);
+    button(element, 'Preview import').click();
+    await settle(fixture);
+    expect(element.textContent).toContain('CSV header must match');
+    expect(button(element, 'Import tasks').disabled).toBeTrue();
+    expect(store.state.tasks.length).toBe(12);
+  });
+  it('invalidates a preview when text changes', async () => {
+    const { fixture, element } = await setup('#/settings');
+    change(
+      control(element, 'Import text'),
+      'title,description,status,priority,projectId,assignee,dueDate,estimate'
+    );
+    await settle(fixture);
+    button(element, 'Preview import').click();
+    await settle(fixture);
+    expect(button(element, 'Import tasks').disabled).toBeFalse();
+    change(control(element, 'Import text'), 'changed');
+    await settle(fixture);
+    expect(element.textContent).not.toContain('passed validation');
+  });
+});

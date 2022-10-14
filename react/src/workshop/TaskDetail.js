@@ -1,2 +1,34 @@
-import {useWorkshop} from './store';import {memberName} from './shared/members';import {formatDate} from './shared/dates';
-export default function TaskDetail({task,children}){const {state,navigate,setEditing,dispatch}=useWorkshop();return <aside className="detail panel" aria-label="Task details"><div className="row"><small>{task.id}</small><button onClick={()=>navigate('tasks')}>Close details</button></div><h2>{task.title}</h2><p>{task.description||'Add a description to explain the acceptance criteria.'}</p><dl className="facts"><dt>Owner</dt><dd>{memberName(state,task.assignee)}</dd><dt>Due</dt><dd>{formatDate(task.dueDate)}</dd><dt>Estimate</dt><dd>{task.estimate} points</dd></dl><div className="row"><button disabled={task.archived} onClick={()=>setEditing(task.id)}>Edit task</button><button onClick={()=>dispatch('task.duplicate',{id:task.id})}>Duplicate task</button><button onClick={()=>dispatch('task.archive',{id:task.id,archived:!task.archived})}>{task.archived?'Restore task':'Archive task'}</button></div>{children}</aside>;}
+import { useWorkshop } from './store';
+import { memberName } from './shared/members';
+import { formatDate } from './shared/dates';
+export default function TaskDetail({ task, children }) {
+  const { state, navigate, setEditing, dispatch } = useWorkshop();
+  return (
+    <aside className="detail panel" aria-label="Task details">
+      <div className="row">
+        <small>{task.id}</small>
+        <button onClick={() => navigate('tasks')}>Close details</button>
+      </div>
+      <h2>{task.title}</h2>
+      <p>{task.description || 'Add a description to explain the acceptance criteria.'}</p>
+      <dl className="facts">
+        <dt>Owner</dt>
+        <dd>{memberName(state, task.assignee)}</dd>
+        <dt>Due</dt>
+        <dd>{formatDate(task.dueDate)}</dd>
+        <dt>Estimate</dt>
+        <dd>{task.estimate} points</dd>
+      </dl>
+      <div className="row">
+        <button disabled={task.archived} onClick={() => setEditing(task.id)}>
+          Edit task
+        </button>
+        <button onClick={() => dispatch('task.duplicate', { id: task.id })}>Duplicate task</button>
+        <button onClick={() => dispatch('task.archive', { id: task.id, archived: !task.archived })}>
+          {task.archived ? 'Restore task' : 'Archive task'}
+        </button>
+      </div>
+      {children}
+    </aside>
+  );
+}

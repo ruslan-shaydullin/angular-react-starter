@@ -1,1 +1,15 @@
-<section class="keyboard-help"><button [attr.aria-expanded]="s.help" (click)="s.help=!s.help">Keyboard help</button><div *ngIf="s.help" class="panel"><h2>Keyboard shortcuts</h2><p>Single-key shortcuts are inactive while editing a text field.</p><dl><div class="row" *ngFor="let shortcut of shortcuts"><dt><kbd>{{shortcut.keys}}</kbd></dt><dd>{{shortcut.action}}</dd></div></dl></div></section>
+<section class="keyboard-help">
+  <button [attr.aria-expanded]="s.help" (click)="s.help = !s.help">Keyboard help</button>
+  <div *ngIf="s.help" class="panel">
+    <h2>Keyboard shortcuts</h2>
+    <p>Single-key shortcuts are inactive while editing a text field.</p>
+    <dl>
+      <div class="row" *ngFor="let shortcut of shortcuts">
+        <dt>
+          <kbd>{{ shortcut.keys }}</kbd>
+        </dt>
+        <dd>{{ shortcut.action }}</dd>
+      </div>
+    </dl>
+  </div>
+</section>

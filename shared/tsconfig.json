@@ -5,15 +5,10 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "outDir": "../.shared-build",
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true
   },
-  "include": [
-    "*.ts"
-  ]
+  "include": ["*.ts"]
 }

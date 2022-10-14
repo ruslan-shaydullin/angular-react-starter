@@ -1,1 +1,40 @@
-<section aria-label="Status board"><h2>Work in motion</h2><p>Move work with buttons; every transition uses the same completion rules as the table.</p><div class="board"><section class="board-column" *ngFor="let column of columns"><h3>{{column.label}} <span class="count">{{column.tasks.length}}</span></h3><p class="muted">{{column.points}} points</p><p *ngIf="column.status==='doing' && boardLimitWarning(s.state,column.status,3)" class="notice">{{boardLimitWarning(s.state,column.status,3)}}</p><article class="board-task" *ngFor="let task of column.tasks"><button class="text-button" (click)="s.navigate('tasks',task.id)">{{task.title}}</button><p><small>{{task.id}} • {{task.priority}} • {{task.estimate}} points</small></p><div class="row"><button [attr.aria-label]="'Move '+task.title+' backward'" [disabled]="!adjacentStatus(task.status,-1)" (click)="s.dispatch('task.move',{id:task.id,direction:-1})">Back</button><button [attr.aria-label]="'Move '+task.title+' forward'" [disabled]="!adjacentStatus(task.status,1)" (click)="s.dispatch('task.move',{id:task.id,direction:1})">Next</button></div></article><p *ngIf="!column.tasks.length" class="empty">No work in this stage.</p></section></div></section>
+<section aria-label="Status board">
+  <h2>Work in motion</h2>
+  <p>Move work with buttons; every transition uses the same completion rules as the table.</p>
+  <div class="board">
+    <section class="board-column" *ngFor="let column of columns">
+      <h3>
+        {{ column.label }} <span class="count">{{ column.tasks.length }}</span>
+      </h3>
+      <p class="muted">{{ column.points }} points</p>
+      <p
+        *ngIf="column.status === 'doing' && boardLimitWarning(s.state, column.status, 3)"
+        class="notice"
+      >
+        {{ boardLimitWarning(s.state, column.status, 3) }}
+      </p>
+      <article class="board-task" *ngFor="let task of column.tasks">
+        <button class="text-button" (click)="s.navigate('tasks', task.id)">{{ task.title }}</button>
+        <p>
+          <small>{{ task.id }} • {{ task.priority }} • {{ task.estimate }} points</small>
+        </p>
+        <div class="row">
+          <button
+            [attr.aria-label]="'Move ' + task.title + ' backward'"
+            [disabled]="!adjacentStatus(task.status, -1)"
+            (click)="s.dispatch('task.move', { id: task.id, direction: -1 })"
+          >
+            Back</button
+          ><button
+            [attr.aria-label]="'Move ' + task.title + ' forward'"
+            [disabled]="!adjacentStatus(task.status, 1)"
+            (click)="s.dispatch('task.move', { id: task.id, direction: 1 })"
+          >
+            Next
+          </button>
+        </div>
+      </article>
+      <p *ngIf="!column.tasks.length" class="empty">No work in this stage.</p>
+    </section>
+  </div>
+</section>

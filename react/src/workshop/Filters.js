@@ -1,2 +1,102 @@
-import {useWorkshop} from './store';import {STATUSES,PRIORITIES} from './shared/types';import {statusLabel} from './shared/status';import {activeFilterCount} from './shared/filters';import {allTags} from './shared/tags';
-export default function Filters(){const {state,filters,updateFilters,clearFilters}=useWorkshop();return <section className="filters" aria-label="Task filters"><div className="row"><label>Search tasks<input id="task-search" type="search" value={filters.text} onChange={event=>updateFilters({text:event.target.value})} placeholder="Title, owner, project or tag"/></label><label>Status<select value={filters.status} onChange={event=>updateFilters({status:event.target.value})}><option value="">All statuses</option>{STATUSES.map(status=><option key={status} value={status}>{statusLabel(status)}</option>)}</select></label><label>Priority<select value={filters.priority} onChange={event=>updateFilters({priority:event.target.value})}><option value="">All priorities</option>{PRIORITIES.map(value=><option key={value}>{value}</option>)}</select></label></div><div className="row"><label>Project<select value={filters.projectId} onChange={event=>updateFilters({projectId:event.target.value})}><option value="">All projects</option>{state.projects.map(project=><option key={project.id} value={project.id}>{project.name}</option>)}</select></label><label>Owner<select value={filters.assignee} onChange={event=>updateFilters({assignee:event.target.value})}><option value="">All owners</option><option value="unassigned">Unassigned</option>{state.members.map(member=><option key={member.id} value={member.id}>{member.name}</option>)}</select></label><label>Tag<select value={filters.tag} onChange={event=>updateFilters({tag:event.target.value})}><option value="">All tags</option>{allTags(state).map(tag=><option key={tag}>{tag}</option>)}</select></label><label className="check-label"><input type="checkbox" checked={filters.archived} onChange={event=>updateFilters({archived:event.target.checked})}/>Archived tasks</label><button onClick={clearFilters}>Clear filters ({activeFilterCount(filters)})</button></div></section>;}
+import { useWorkshop } from './store';
+import { STATUSES, PRIORITIES } from './shared/types';
+import { statusLabel } from './shared/status';
+import { activeFilterCount } from './shared/filters';
+import { allTags } from './shared/tags';
+export default function Filters() {
+  const { state, filters, updateFilters, clearFilters } = useWorkshop();
+  return (
+    <section className="filters" aria-label="Task filters">
+      <div className="row">
+        <label>
+          Search tasks
+          <input
+            id="task-search"
+            type="search"
+            value={filters.text}
+            onChange={(event) => updateFilters({ text: event.target.value })}
+            placeholder="Title, owner, project or tag"
+          />
+        </label>
+        <label>
+          Status
+          <select
+            value={filters.status}
+            onChange={(event) => updateFilters({ status: event.target.value })}
+          >
+            <option value="">All statuses</option>
+            {STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {statusLabel(status)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Priority
+          <select
+            value={filters.priority}
+            onChange={(event) => updateFilters({ priority: event.target.value })}
+          >
+            <option value="">All priorities</option>
+            {PRIORITIES.map((value) => (
+              <option key={value}>{value}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="row">
+        <label>
+          Project
+          <select
+            value={filters.projectId}
+            onChange={(event) => updateFilters({ projectId: event.target.value })}
+          >
+            <option value="">All projects</option>
+            {state.projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Owner
+          <select
+            value={filters.assignee}
+            onChange={(event) => updateFilters({ assignee: event.target.value })}
+          >
+            <option value="">All owners</option>
+            <option value="unassigned">Unassigned</option>
+            {state.members.map((member) => (
+              <option key={member.id} value={member.id}>
+                {member.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Tag
+          <select
+            value={filters.tag}
+            onChange={(event) => updateFilters({ tag: event.target.value })}
+          >
+            <option value="">All tags</option>
+            {allTags(state).map((tag) => (
+              <option key={tag}>{tag}</option>
+            ))}
+          </select>
+        </label>
+        <label className="check-label">
+          <input
+            type="checkbox"
+            checked={filters.archived}
+            onChange={(event) => updateFilters({ archived: event.target.checked })}
+          />
+          Archived tasks
+        </label>
+        <button onClick={clearFilters}>Clear filters ({activeFilterCount(filters)})</button>
+      </div>
+    </section>
+  );
+}

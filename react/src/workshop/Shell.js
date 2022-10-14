@@ -1,2 +1,56 @@
-import {useWorkshop} from './store';import {PAGES,pageLabel,routeHash} from './shared/routes';
-export default function Shell({children}) {const {route,errors,message}=useWorkshop();return <><a className="skip-link" href="#main">Skip to workspace</a><div className="shell"><header className="masthead"><div><h1>Release workshop</h1><p>Plan, review, and ship a small release together.</p></div><span className="framework">React 18</span></header><nav aria-label="Workspace">{PAGES.map(page=><a key={page} href={routeHash(page)} aria-current={route.page===page?'page':undefined}>{pageLabel(page)}</a>)}</nav><div role="status" aria-live="polite">{message&&<p className="notice">{message}</p>}</div>{errors.length>0&&<div role="alert" className="error"><p>Resolve these issues and try again:</p><ul>{errors.map((error,index)=><li key={index}>{error}</li>)}</ul></div>}<main id="main" tabIndex={-1}>{children||<section className="panel"><h2>{pageLabel(route.page)}</h2><p>Select a workshop feature to explore the shared model.</p></section>}</main><footer><p>Fictional planning data. Reference date: 8 July 2022. Changes stay in this browser.</p></footer></div></>;}
+import { useWorkshop } from './store';
+import { PAGES, pageLabel, routeHash } from './shared/routes';
+export default function Shell({ children }) {
+  const { route, errors, message } = useWorkshop();
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to workspace
+      </a>
+      <div className="shell">
+        <header className="masthead">
+          <div>
+            <h1>Release workshop</h1>
+            <p>Plan, review, and ship a small release together.</p>
+          </div>
+          <span className="framework">React 18</span>
+        </header>
+        <nav aria-label="Workspace">
+          {PAGES.map((page) => (
+            <a
+              key={page}
+              href={routeHash(page)}
+              aria-current={route.page === page ? 'page' : undefined}
+            >
+              {pageLabel(page)}
+            </a>
+          ))}
+        </nav>
+        <div role="status" aria-live="polite">
+          {message && <p className="notice">{message}</p>}
+        </div>
+        {errors.length > 0 && (
+          <div role="alert" className="error">
+            <p>Resolve these issues and try again:</p>
+            <ul>
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <main id="main" tabIndex={-1}>
+          {children || (
+            <section className="panel">
+              <h2>{pageLabel(route.page)}</h2>
+              <p>Select a workshop feature to explore the shared model.</p>
+            </section>
+          )}
+        </main>
+        <footer>
+          <p>Fictional planning data. Reference date: 8 July 2022. Changes stay in this browser.</p>
+        </footer>
+      </div>
+    </>
+  );
+}

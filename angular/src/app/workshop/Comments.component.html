@@ -1,1 +1,27 @@
-<section class="detail-section"><h3>Discussion</h3><ol class="comments"><li *ngFor="let comment of task.comments"><strong>{{memberName(s.state,comment.author)}}</strong><time [attr.datetime]="comment.createdAt">{{comment.createdAt|date:'short'}}</time><p>{{comment.text}}</p></li></ol><p *ngIf="!task.comments.length" class="muted">Record a review decision or ask for context.</p><form (ngSubmit)="add()" class="stack"><label>Comment author<select name="author" [(ngModel)]="author"><option *ngFor="let member of s.state.members" [value]="member.id">{{member.name}}</option></select></label><label>New comment<textarea name="comment" [(ngModel)]="text" maxlength="1000" rows="3"></textarea></label><button [disabled]="task.archived" type="submit">Add comment</button></form></section>
+<section class="detail-section">
+  <h3>Discussion</h3>
+  <ol class="comments">
+    <li *ngFor="let comment of task.comments">
+      <strong>{{ memberName(s.state, comment.author) }}</strong
+      ><time [attr.datetime]="comment.createdAt">{{ comment.createdAt | date: 'short' }}</time>
+      <p>{{ comment.text }}</p>
+    </li>
+  </ol>
+  <p *ngIf="!task.comments.length" class="muted">Record a review decision or ask for context.</p>
+  <form (ngSubmit)="add()" class="stack">
+    <label
+      >Comment author<select name="author" [(ngModel)]="author">
+        <option *ngFor="let member of s.state.members" [value]="member.id">
+          {{ member.name }}
+        </option>
+      </select></label
+    ><label
+      >New comment<textarea
+        name="comment"
+        [(ngModel)]="text"
+        maxlength="1000"
+        rows="3"
+      ></textarea></label
+    ><button [disabled]="task.archived" type="submit">Add comment</button>
+  </form>
+</section>

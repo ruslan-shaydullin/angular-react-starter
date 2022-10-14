@@ -1,1 +1,31 @@
-<section class="panel"><h2>July release at a glance</h2><p>Two teams are preparing a recovery rehearsal and an accessible account beta.</p><div class="metrics"><div><strong>{{metrics.open}}</strong><span>Open work</span></div><div><strong>{{metrics.review}}</strong><span>In review</span></div><div><strong>{{metrics.blocked}}</strong><span>Blocked</span></div><div><strong>{{metrics.overdue}}</strong><span>Overdue</span></div></div><label>Completed work: {{metrics.done}} of {{metrics.total}}<progress max="100" [value]="metrics.completion">{{metrics.completion}}%</progress></label><p>{{metrics.effort.remaining}} estimated points remain. {{metrics.unassigned}} tasks need an owner.</p><button (click)="s.navigate('tasks')">Review open tasks</button></section>
+<section class="panel">
+  <h2>July release at a glance</h2>
+  <p>Two teams are preparing a recovery rehearsal and an accessible account beta.</p>
+  <div class="metrics">
+    <div>
+      <strong>{{ metrics.open }}</strong
+      ><span>Open work</span>
+    </div>
+    <div>
+      <strong>{{ metrics.review }}</strong
+      ><span>In review</span>
+    </div>
+    <div>
+      <strong>{{ metrics.blocked }}</strong
+      ><span>Blocked</span>
+    </div>
+    <div>
+      <strong>{{ metrics.overdue }}</strong
+      ><span>Overdue</span>
+    </div>
+  </div>
+  <label
+    >Completed work: {{ metrics.done }} of {{ metrics.total
+    }}<progress max="100" [value]="metrics.completion">{{ metrics.completion }}%</progress></label
+  >
+  <p>
+    {{ metrics.effort.remaining }} estimated points remain. {{ metrics.unassigned }} tasks need an
+    owner.
+  </p>
+  <button (click)="s.navigate('tasks')">Review open tasks</button>
+</section>

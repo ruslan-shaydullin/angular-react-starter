@@ -1,2 +1,39 @@
-import {useState} from 'react';import {useWorkshop} from './store';import {encodeFilters} from './shared/query';
-export default function SavedViews(){const {state,filters,updateFilters,dispatch}=useWorkshop();const [name,setName]=useState('');return <details className="saved-views"><summary>Saved task views ({state.views.length})</summary><ul className="plain-list">{state.views.map(view=><li className="row" key={view.id}><button onClick={()=>updateFilters(view.filters)}>{view.name}</button><a href={'#/tasks?'+encodeFilters(view.filters)}>Open link</a><button aria-label={'Remove view '+view.name} onClick={()=>dispatch('view.remove',{id:view.id})}>Remove</button></li>)}</ul><form className="row" onSubmit={event=>{event.preventDefault();if(dispatch('view.save',{name,filters}))setName('');}}><label>Save current filters as<input value={name} onChange={event=>setName(event.target.value)} maxLength={60}/></label><button>Save view</button></form></details>;}
+import { useState } from 'react';
+import { useWorkshop } from './store';
+import { encodeFilters } from './shared/query';
+export default function SavedViews() {
+  const { state, filters, updateFilters, dispatch } = useWorkshop();
+  const [name, setName] = useState('');
+  return (
+    <details className="saved-views">
+      <summary>Saved task views ({state.views.length})</summary>
+      <ul className="plain-list">
+        {state.views.map((view) => (
+          <li className="row" key={view.id}>
+            <button onClick={() => updateFilters(view.filters)}>{view.name}</button>
+            <a href={'#/tasks?' + encodeFilters(view.filters)}>Open link</a>
+            <button
+              aria-label={'Remove view ' + view.name}
+              onClick={() => dispatch('view.remove', { id: view.id })}
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+      <form
+        className="row"
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (dispatch('view.save', { name, filters })) setName('');
+        }}
+      >
+        <label>
+          Save current filters as
+          <input value={name} onChange={(event) => setName(event.target.value)} maxLength={60} />
+        </label>
+        <button>Save view</button>
+      </form>
+    </details>
+  );
+}

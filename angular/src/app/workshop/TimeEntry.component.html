@@ -1,1 +1,23 @@
-<section class="detail-section"><h3>Time recorded: {{formatMinutes(totalMinutes(task))}}</h3><ul><li *ngFor="let entry of task.timeEntries">{{entry.date}}: {{formatMinutes(entry.minutes)}} {{entry.note}}</li></ul><form (ngSubmit)="save()" novalidate class="stack"><div class="row"><label>Minutes worked<input type="number" name="minutes" min="1" max="1440" [(ngModel)]="minutes"></label><label>Work date<input type="date" name="date" [(ngModel)]="date"></label></div><label>Time note<input name="note" [(ngModel)]="note" maxlength="300"></label><button [disabled]="task.archived" type="submit">Record time</button></form><p class="muted">Time records measure elapsed work. Estimate points describe relative effort.</p></section>
+<section class="detail-section">
+  <h3>Time recorded: {{ formatMinutes(totalMinutes(task)) }}</h3>
+  <ul>
+    <li *ngFor="let entry of task.timeEntries">
+      {{ entry.date }}: {{ formatMinutes(entry.minutes) }} {{ entry.note }}
+    </li>
+  </ul>
+  <form (ngSubmit)="save()" novalidate class="stack">
+    <div class="row">
+      <label
+        >Minutes worked<input
+          type="number"
+          name="minutes"
+          min="1"
+          max="1440"
+          [(ngModel)]="minutes" /></label
+      ><label>Work date<input type="date" name="date" [(ngModel)]="date" /></label>
+    </div>
+    <label>Time note<input name="note" [(ngModel)]="note" maxlength="300" /></label
+    ><button [disabled]="task.archived" type="submit">Record time</button>
+  </form>
+  <p class="muted">Time records measure elapsed work. Estimate points describe relative effort.</p>
+</section>

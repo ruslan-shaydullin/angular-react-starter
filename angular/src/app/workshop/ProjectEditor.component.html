@@ -1,1 +1,17 @@
-<section class="panel"><h2>{{project?'Edit project':'New project'}}</h2><form (ngSubmit)="save()" class="stack" novalidate><label>Project name<input name="name" [(ngModel)]="draft.name" maxlength="80"></label><label>Project description<textarea name="description" [(ngModel)]="draft.description" maxlength="500"></textarea></label><label>Project color<input type="color" name="color" [(ngModel)]="draft.color"></label><div class="row"><button type="submit">Save project</button><button type="button" (click)="closed.emit()">Cancel</button></div></form></section>
+<section class="panel">
+  <h2>{{ project ? 'Edit project' : 'New project' }}</h2>
+  <form (ngSubmit)="save()" class="stack" novalidate>
+    <label>Project name<input name="name" [(ngModel)]="draft.name" maxlength="80" /></label
+    ><label
+      >Project description<textarea
+        name="description"
+        [(ngModel)]="draft.description"
+        maxlength="500"
+      ></textarea></label
+    ><label>Project color<input type="color" name="color" [(ngModel)]="draft.color" /></label>
+    <div class="row">
+      <button type="submit">Save project</button
+      ><button type="button" (click)="closed.emit()">Cancel</button>
+    </div>
+  </form>
+</section>

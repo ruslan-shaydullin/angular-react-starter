@@ -1,1 +1,63 @@
-<section class="filters" aria-label="Task filters"><div class="row"><label>Search tasks<input id="task-search" type="search" [ngModel]="s.filters.text" (ngModelChange)="s.updateFilters({text:$event})" placeholder="Title, owner, project or tag"></label><label>Status<select [ngModel]="s.filters.status" (ngModelChange)="s.updateFilters({status:$event})"><option value="">All statuses</option><option *ngFor="let status of statuses" [value]="status">{{statusLabel(status)}}</option></select></label><label>Priority<select [ngModel]="s.filters.priority" (ngModelChange)="s.updateFilters({priority:$event})"><option value="">All priorities</option><option *ngFor="let priority of priorities">{{priority}}</option></select></label></div><div class="row"><label>Project<select [ngModel]="s.filters.projectId" (ngModelChange)="s.updateFilters({projectId:$event})"><option value="">All projects</option><option *ngFor="let project of s.state.projects" [value]="project.id">{{project.name}}</option></select></label><label>Owner<select [ngModel]="s.filters.assignee" (ngModelChange)="s.updateFilters({assignee:$event})"><option value="">All owners</option><option value="unassigned">Unassigned</option><option *ngFor="let member of s.state.members" [value]="member.id">{{member.name}}</option></select></label><label>Tag<select [ngModel]="s.filters.tag" (ngModelChange)="s.updateFilters({tag:$event})"><option value="">All tags</option><option *ngFor="let tag of tags">{{tag}}</option></select></label><label class="check-label"><input type="checkbox" [ngModel]="s.filters.archived" (ngModelChange)="s.updateFilters({archived:$event})">Archived tasks</label><button (click)="s.clearFilters()">Clear filters ({{activeFilterCount(s.filters)}})</button></div></section>
+<section class="filters" aria-label="Task filters">
+  <div class="row">
+    <label
+      >Search tasks<input
+        id="task-search"
+        type="search"
+        [ngModel]="s.filters.text"
+        (ngModelChange)="s.updateFilters({ text: $event })"
+        placeholder="Title, owner, project or tag" /></label
+    ><label
+      >Status<select
+        [ngModel]="s.filters.status"
+        (ngModelChange)="s.updateFilters({ status: $event })"
+      >
+        <option value="">All statuses</option>
+        <option *ngFor="let status of statuses" [value]="status">{{ statusLabel(status) }}</option>
+      </select></label
+    ><label
+      >Priority<select
+        [ngModel]="s.filters.priority"
+        (ngModelChange)="s.updateFilters({ priority: $event })"
+      >
+        <option value="">All priorities</option>
+        <option *ngFor="let priority of priorities">{{ priority }}</option>
+      </select></label
+    >
+  </div>
+  <div class="row">
+    <label
+      >Project<select
+        [ngModel]="s.filters.projectId"
+        (ngModelChange)="s.updateFilters({ projectId: $event })"
+      >
+        <option value="">All projects</option>
+        <option *ngFor="let project of s.state.projects" [value]="project.id">
+          {{ project.name }}
+        </option>
+      </select></label
+    ><label
+      >Owner<select
+        [ngModel]="s.filters.assignee"
+        (ngModelChange)="s.updateFilters({ assignee: $event })"
+      >
+        <option value="">All owners</option>
+        <option value="unassigned">Unassigned</option>
+        <option *ngFor="let member of s.state.members" [value]="member.id">
+          {{ member.name }}
+        </option>
+      </select></label
+    ><label
+      >Tag<select [ngModel]="s.filters.tag" (ngModelChange)="s.updateFilters({ tag: $event })">
+        <option value="">All tags</option>
+        <option *ngFor="let tag of tags">{{ tag }}</option>
+      </select></label
+    ><label class="check-label"
+      ><input
+        type="checkbox"
+        [ngModel]="s.filters.archived"
+        (ngModelChange)="s.updateFilters({ archived: $event })"
+      />Archived tasks</label
+    ><button (click)="s.clearFilters()">Clear filters ({{ activeFilterCount(s.filters) }})</button>
+  </div>
+</section>

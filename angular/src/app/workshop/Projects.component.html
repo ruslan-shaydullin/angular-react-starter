@@ -1,1 +1,26 @@
-<section class="panel"><h2>Projects</h2><div class="project-grid"><article class="project-card" *ngFor="let project of projects" [style.border-top-color]="project.color"><h3>{{project.name}}</h3><p>{{project.description}}</p><label>{{project.completed}} of {{project.total}} tasks complete<progress [value]="project.progress" max="100">{{project.progress}}%</progress></label><p>{{project.effort.remaining}} points remaining • {{project.members.length}} owners</p><div class="row"><button (click)="open(project.id)">View project tasks</button><button (click)="editProject.emit(project)">Edit project</button></div></article></div></section>
+<section class="panel">
+  <h2>Projects</h2>
+  <div class="project-grid">
+    <article
+      class="project-card"
+      *ngFor="let project of projects"
+      [style.border-top-color]="project.color"
+    >
+      <h3>{{ project.name }}</h3>
+      <p>{{ project.description }}</p>
+      <label
+        >{{ project.completed }} of {{ project.total }} tasks complete<progress
+          [value]="project.progress"
+          max="100"
+        >
+          {{ project.progress }}%
+        </progress></label
+      >
+      <p>{{ project.effort.remaining }} points remaining • {{ project.members.length }} owners</p>
+      <div class="row">
+        <button (click)="open(project.id)">View project tasks</button
+        ><button (click)="editProject.emit(project)">Edit project</button>
+      </div>
+    </article>
+  </div>
+</section>

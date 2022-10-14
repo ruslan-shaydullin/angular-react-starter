@@ -1,1 +1,19 @@
-<details class="saved-views"><summary>Saved task views ({{s.state.views.length}})</summary><ul class="plain-list"><li class="row" *ngFor="let view of s.state.views"><button (click)="s.updateFilters(view.filters)">{{view.name}}</button><a [href]="'#/tasks?'+encodeFilters(view.filters)">Open link</a><button [attr.aria-label]="'Remove view '+view.name" (click)="s.dispatch('view.remove',{id:view.id})">Remove</button></li></ul><form class="row" (ngSubmit)="save()"><label>Save current filters as<input name="name" [(ngModel)]="name" maxlength="60"></label><button>Save view</button></form></details>
+<details class="saved-views">
+  <summary>Saved task views ({{ s.state.views.length }})</summary>
+  <ul class="plain-list">
+    <li class="row" *ngFor="let view of s.state.views">
+      <button (click)="s.updateFilters(view.filters)">{{ view.name }}</button
+      ><a [href]="'#/tasks?' + encodeFilters(view.filters)">Open link</a
+      ><button
+        [attr.aria-label]="'Remove view ' + view.name"
+        (click)="s.dispatch('view.remove', { id: view.id })"
+      >
+        Remove
+      </button>
+    </li>
+  </ul>
+  <form class="row" (ngSubmit)="save()">
+    <label>Save current filters as<input name="name" [(ngModel)]="name" maxlength="60" /></label
+    ><button>Save view</button>
+  </form>
+</details>
