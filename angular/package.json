@@ -14,7 +14,8 @@
     "prebuild": "node ../scripts/sync-shared.cjs angular",
     "pretest": "node ../scripts/sync-shared.cjs angular",
     "precoverage": "node ../scripts/sync-shared.cjs angular",
-    "prelint": "node ../scripts/sync-shared.cjs angular"
+    "prelint": "node ../scripts/sync-shared.cjs angular",
+    "test:ci": "node ../scripts/sync-shared.cjs angular && ng test --watch=false --browsers=ChromeHeadless --progress=false"
   },
   "private": true,
   "dependencies": {

@@ -1,7 +1,8 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "projects/**/*",
+    "src/workshop/shared/**"
   ],
   "overrides": [
     {
@@ -19,19 +20,17 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "no-undefined": "error",
+        "no-alert": "error",
         "no-var": "error",
         "prefer-const": "error",
-        "func-names": "error",
-        "id-length": "error",
-        "newline-before-return": "error",
-        "space-before-blocks": "error",
-        "no-alert": "error",
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": [
+              "app",
+              "workshop"
+            ],
             "style": "camelCase"
           }
         ],
@@ -39,7 +38,10 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": [
+              "app",
+              "workshop"
+            ],
             "style": "kebab-case"
           }
         ]

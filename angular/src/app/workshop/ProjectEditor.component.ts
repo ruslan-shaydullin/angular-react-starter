@@ -1,8 +1,9 @@
+import { OnChanges } from '@angular/core';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WorkshopStore } from './store.service';
 import { Project } from '../../workshop/shared/types';
 @Component({ selector: 'workshop-project-editor', templateUrl: './ProjectEditor.component.html' })
-export class ProjectEditorComponent {
+export class ProjectEditorComponent implements OnChanges {
   constructor(public s: WorkshopStore) {}
 
   @Input() project: Project | null = null;

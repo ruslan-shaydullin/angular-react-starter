@@ -5,7 +5,7 @@ import { Task, PRIORITIES } from '../../workshop/shared/types';
 import { blankTask } from '../../workshop/shared/create-task';
 import { TASK_TEMPLATES, taskFromTemplate } from '../../workshop/shared/templates';
 @Component({ selector: 'workshop-task-editor', templateUrl: './TaskEditor.component.html' })
-export class TaskEditorComponent {
+export class TaskEditorComponent implements OnInit, OnChanges {
   constructor(public s: WorkshopStore) {}
 
   @Input() task?: Task;
