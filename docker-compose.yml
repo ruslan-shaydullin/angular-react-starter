@@ -1,7 +1,24 @@
-version: '3'
+version: '3.8'
 services:
-  angular-starter:
-    image: ghcr.io/stratch1989/angular-react-starter:master
-    container_name: angular
+  angular-workshop:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - '127.0.0.1:8080:8080'
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '-', 'http://127.0.0.1:8080/healthz']
+      interval: 30s
+      timeout: 3s
+      retries: 3
+  react-workshop:
+    build:
+      context: .
+      dockerfile: react/Dockerfile
+    ports:
+      - '127.0.0.1:8081:8080'
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '-', 'http://127.0.0.1:8080/healthz']
+      interval: 30s
+      timeout: 3s
+      retries: 3
