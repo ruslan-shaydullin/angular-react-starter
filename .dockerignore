@@ -1,0 +1,12 @@
+.git
+**/node_modules
+**/.angular
+**/dist
+**/build
+**/coverage
+.shared-build
+angular/src/workshop/shared
+react/src/workshop/shared
+angular/src/workshop/workshop.css
+react/src/workshop/workshop.css
+*.log
