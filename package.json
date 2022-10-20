@@ -10,7 +10,8 @@
     "format": "prettier --write \"shared/*.{ts,css,json}\" \"scripts/*.cjs\" \"tests/*.cjs\" \"react/src/**/*.{js,css}\" \"angular/src/app/**/*.{ts,html}\"",
     "format:check": "prettier --check \"shared/*.{ts,css,json}\" \"scripts/*.cjs\" \"tests/*.cjs\" \"react/src/**/*.{js,css}\" \"angular/src/app/**/*.{ts,html}\"",
     "parity": "node scripts/check-parity.cjs",
-    "verify": "node scripts/verify.cjs"
+    "verify": "node scripts/verify.cjs",
+    "check:builds": "node scripts/check-builds.cjs"
   },
   "devDependencies": {
     "typescript": "4.7.4",
