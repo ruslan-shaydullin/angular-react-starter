@@ -1,88 +1,27 @@
-name: Image_Alpine_NginX
-
-on: [push, pull_request]
-
+name: Validate paired workshop
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
 jobs:
-  testing:
-  
+  verify:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./angular
-    
-    strategy: 
-        matrix:
-            node-version: [16.x]
-
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v3
-    
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +%s)"
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-            node-version: ${{ matrix.node-version }}
-      - run: |
-          npm ci
-          npm run build
-          npm test -- --watch=false --browsers=ChromeHeadless
+          node-version: 16.20.2
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            angular/package-lock.json
+            react/package-lock.json
+      - run: npm ci
+      - run: npm ci --prefix angular
+      - run: npm ci --prefix react
+      - run: npm run verify
         env:
-          ci: true
-
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-          to: ${{ secrets.EMAIL_TO }}
-          from: ${{ secrets.EMAIL_FROM }}
-          secure: true
-
-  building:
-
-    needs: ['testing']
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./angular
-    
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-      - run: |
-          npm ci
-          npm run build --prod 
-        
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}
-      
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          CHROME_BIN: /usr/bin/google-chrome
+          CI: true
