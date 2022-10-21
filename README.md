@@ -1,3 +1,28 @@
+# Paired release workshop
+
+The original Ganatan Angular 14 / React 18 starter now includes matching local release-planning examples: task forms, accessible tables and board actions, dependency rules, projects, team capacity, milestones, import/export, persistence and undo.
+
+## Run the workshop
+
+Use Node 16.20 with npm 8 for the preserved framework stack. Install the root compiler before either application:
+
+```sh
+npm ci
+npm ci --prefix angular
+npm ci --prefix react
+npm --prefix angular start
+# In another terminal:
+npm --prefix react start
+```
+
+Angular opens on [localhost:4200](http://localhost:4200), React on [localhost:3000](http://localhost:3000). Each origin saves its own fictional workspace. Shared edits require `npm run shared` while development servers are already running.
+
+Read the [workshop source map](docs/WORKSHOP.md), [30 paired lessons](docs/lessons/INDEX.md), [headless test setup](docs/HEADLESS_TESTS.md), and [browser acceptance checks](docs/BROWSER_CHECKS.md). Run `npm run verify` for domain tests, both component suites and both production builds; supply `CHROME_BIN` when Chrome is not in its standard location.
+
+The starter and original tutorial attribution below are retained. Linked Ganatan live demos demonstrate the upstream starter, not this local workshop extension. The application has no deployment, publishing, email or server-side side effects.
+
+---
+
 # Angular 14 & React 18 Examples Starter
 
 <table>
