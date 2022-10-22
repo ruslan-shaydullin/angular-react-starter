@@ -7,3 +7,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 3. [Design transactional commands](state-commands.md)
 4. [Separate form normalization from snapshot validation](task-validation.md)
 5. [Compare form adapters](controlled-forms.md)
+6. [Build a semantic interactive table](task-tables.md)
