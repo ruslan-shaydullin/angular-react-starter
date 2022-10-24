@@ -15,3 +15,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 11. [Protect the dependency graph](dependencies.md)
 12. [Model acceptance criteria as identified items](checklists.md)
 13. [Render discussion text safely](comments.md)
+14. [Distinguish effort points from elapsed time](time-estimates.md)
