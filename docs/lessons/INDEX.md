@@ -11,3 +11,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 7. [Compose predictable task queries](search-filters.md)
 8. [Keep ordering and paging stable](sorting-pagination.md)
 9. [Make selection scope explicit](selection-bulk-actions.md)
+10. [Use accessible board movement](status-board.md)
