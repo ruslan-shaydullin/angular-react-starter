@@ -12,3 +12,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 8. [Keep ordering and paging stable](sorting-pagination.md)
 9. [Make selection scope explicit](selection-bulk-actions.md)
 10. [Use accessible board movement](status-board.md)
+11. [Protect the dependency graph](dependencies.md)
