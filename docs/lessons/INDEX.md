@@ -9,3 +9,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 5. [Compare form adapters](controlled-forms.md)
 6. [Build a semantic interactive table](task-tables.md)
 7. [Compose predictable task queries](search-filters.md)
+8. [Keep ordering and paging stable](sorting-pagination.md)
