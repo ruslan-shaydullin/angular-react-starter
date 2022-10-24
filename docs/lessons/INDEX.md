@@ -13,3 +13,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 9. [Make selection scope explicit](selection-bulk-actions.md)
 10. [Use accessible board movement](status-board.md)
 11. [Protect the dependency graph](dependencies.md)
+12. [Model acceptance criteria as identified items](checklists.md)
