@@ -17,3 +17,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 13. [Render discussion text safely](comments.md)
 14. [Distinguish effort points from elapsed time](time-estimates.md)
 15. [Avoid timezone drift in planning dates](calendar-dates.md)
+16. [Aggregate project progress without duplicate state](project-planning.md)
