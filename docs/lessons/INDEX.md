@@ -19,3 +19,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 15. [Avoid timezone drift in planning dates](calendar-dates.md)
 16. [Aggregate project progress without duplicate state](project-planning.md)
 17. [Explain workload before changing ownership](team-capacity.md)
+18. [Define release readiness from explicit scope](milestones-releases.md)
