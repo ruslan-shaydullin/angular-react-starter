@@ -22,3 +22,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 18. [Define release readiness from explicit scope](milestones-releases.md)
 19. [Separate derived attention from recorded changes](notifications-activity.md)
 20. [Represent views with safe hash routes](navigation-state.md)
+21. [Save query intent instead of task copies](saved-views.md)
