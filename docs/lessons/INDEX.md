@@ -25,3 +25,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 21. [Save query intent instead of task copies](saved-views.md)
 22. [Preview portable task exchange](csv-exchange.md)
 23. [Validate durable local state](snapshots-persistence.md)
+24. [Bound history and discard stale branches](undo-redo.md)
