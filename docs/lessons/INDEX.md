@@ -26,3 +26,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 22. [Preview portable task exchange](csv-exchange.md)
 23. [Validate durable local state](snapshots-persistence.md)
 24. [Bound history and discard stale branches](undo-redo.md)
+25. [Verify complete keyboard paths](accessibility.md)
