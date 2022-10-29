@@ -28,3 +28,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 24. [Bound history and discard stale branches](undo-redo.md)
 25. [Verify complete keyboard paths](accessibility.md)
 26. [Keep comparison surfaces locally scrollable](responsive-design.md)
+27. [Test domain invariants without a framework](testing-domain.md)
