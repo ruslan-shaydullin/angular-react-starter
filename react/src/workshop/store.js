@@ -4,7 +4,7 @@ import { createHistory, commitCommand, undo, redo } from './shared/history';
 import { loadWorkspace, persistWorkspace } from './shared/persistence';
 import { DEFAULT_FILTERS } from './shared/types';
 import { parseRoute, routeHash } from './shared/routes';
-import { filtersFromHash } from './shared/query';
+import { filtersFromHash, encodeFilters } from './shared/query';
 import { commandMessage } from './shared/explanations';
 import { reconcileSelection } from './shared/selection';
 const Context = createContext(null);
@@ -30,7 +30,7 @@ export function WorkshopProvider({ children }) {
   useEffect(() => {
     const update = () => {
       setRoute(parseRoute(window.location.hash));
-      setFilters(filtersFromHash(window.location.hash));
+      if (window.location.hash.includes('?')) setFilters(filtersFromHash(window.location.hash));
       setPage(1);
     };
     window.addEventListener('hashchange', update);
@@ -59,8 +59,10 @@ export function WorkshopProvider({ children }) {
     install(result.value, commandMessage({ type, payload }, result.value.present));
     return true;
   }
-  function navigate(page, taskId = '') {
-    window.location.hash = routeHash(page, taskId);
+  function navigate(page, taskId = '', nextFilters = filters) {
+    const query = page === 'tasks' ? encodeFilters(nextFilters) : '';
+    window.location.hash = routeHash(page, taskId) + (query ? '?' + query : '');
+    if (page === 'tasks') setFilters(nextFilters);
     setRoute({ page, taskId });
     setEditing(false);
   }

@@ -4,7 +4,14 @@ export default function Shell({ children }) {
   const { route, errors, message } = useWorkshop();
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a
+        className="skip-link"
+        href="#main"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById('main').focus();
+        }}
+      >
         Skip to workspace
       </a>
       <div className="shell">

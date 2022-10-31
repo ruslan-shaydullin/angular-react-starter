@@ -563,3 +563,17 @@ footer {
 .undo-controls {
   margin-bottom: 1rem;
 }
+
+.workspace-grid > * {
+  min-width: 0;
+}
+workshop-workspace,
+workshop-task-detail {
+  display: block;
+  min-width: 0;
+}
+@media (max-width: 1000px) {
+  .workspace-grid > workshop-task-detail {
+    order: -1;
+  }
+}

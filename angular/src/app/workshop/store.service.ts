@@ -4,7 +4,7 @@ import { createHistory, commitCommand, undo, redo, History } from '../../worksho
 import { loadWorkspace, persistWorkspace } from '../../workshop/shared/persistence';
 import { DEFAULT_FILTERS, Filters, Workspace } from '../../workshop/shared/types';
 import { parseRoute, routeHash, PageName } from '../../workshop/shared/routes';
-import { filtersFromHash } from '../../workshop/shared/query';
+import { filtersFromHash, encodeFilters } from '../../workshop/shared/query';
 import { commandMessage } from '../../workshop/shared/explanations';
 import { reconcileSelection } from '../../workshop/shared/selection';
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,7 @@ export class WorkshopStore implements OnDestroy {
   help = false;
   private onHash = () => {
     this.route = parseRoute(window.location.hash);
-    this.filters = filtersFromHash(window.location.hash);
+    if (window.location.hash.includes('?')) this.filters = filtersFromHash(window.location.hash);
     this.page = 1;
   };
   constructor() {
@@ -67,8 +67,10 @@ export class WorkshopStore implements OnDestroy {
     this.install(result.value, commandMessage({ type, payload }, result.value.present));
     return true;
   }
-  navigate(page: PageName, taskId = ''): void {
-    window.location.hash = routeHash(page, taskId);
+  navigate(page: PageName, taskId = '', nextFilters: Filters = this.filters): void {
+    const query = page === 'tasks' ? encodeFilters(nextFilters) : '';
+    window.location.hash = routeHash(page, taskId) + (query ? '?' + query : '');
+    if (page === 'tasks') this.filters = nextFilters;
     this.route = { page, taskId };
     this.editing = false;
   }

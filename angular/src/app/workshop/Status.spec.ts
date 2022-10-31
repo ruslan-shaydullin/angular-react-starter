@@ -9,6 +9,7 @@ describe('Status transitions', () => {
       'Complete every checklist'
     );
     expect(store.state.tasks[0].status).toBe('review');
+    expect(control(element, 'Task status').value).toBe('review');
     (control(element, 'Acceptance criteria reviewed') as HTMLInputElement).click();
     await settle(fixture);
     change(control(element, 'Task status'), 'done');

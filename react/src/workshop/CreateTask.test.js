@@ -19,3 +19,15 @@ test('canceling a draft does not create a task', async () => {
   await user.click(screen.getByRole('button', { name: 'Cancel' }));
   expect(screen.getByText('Showing 1–6 of 12 tasks')).toBeInTheDocument();
 });
+
+test('editing text preserves a separately changed workflow status', async () => {
+  const { user } = renderWorkshop('#/tasks/T-101');
+  await user.click(screen.getByRole('button', { name: 'Edit task', exact: true }));
+  await user.clear(screen.getByLabelText('Task title'));
+  await user.type(screen.getByLabelText('Task title'), 'Review revised recovery objectives');
+  await user.selectOptions(screen.getByLabelText('Task status'), 'ready');
+  await user.click(screen.getByRole('button', { name: 'Save task' }));
+  expect(storedWorkspace().tasks[0].title).toBe('Review revised recovery objectives');
+  expect(storedWorkspace().tasks[0].status).toBe('ready');
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+});

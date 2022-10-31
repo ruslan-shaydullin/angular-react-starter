@@ -3,10 +3,12 @@
   <label
     >Task status<select
       [disabled]="task.archived"
-      [ngModel]="task.status"
-      (ngModelChange)="s.dispatch('task.status', { id: task.id, status: $event })"
+      [value]="task.status"
+      (change)="changeStatus($event)"
     >
-      <option *ngFor="let status of statuses" [value]="status">{{ statusLabel(status) }}</option>
+      <option *ngFor="let status of statuses" [value]="status" [selected]="task.status === status">
+        {{ statusLabel(status) }}
+      </option>
     </select></label
   >
   <p *ngIf="relations.blocked" class="notice">Finish dependencies before marking this task done.</p>

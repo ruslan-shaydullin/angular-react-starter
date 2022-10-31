@@ -9,7 +9,9 @@ export default function TaskEditor({ task, onClose }) {
   const update = (key, value) => setDraft({ ...draft, [key]: value });
   function save(event) {
     event.preventDefault();
-    if (dispatch(task ? 'task.edit' : 'task.create', task ? { id: task.id, values: draft } : draft))
+    const { title, description, projectId, assignee, dueDate, estimate, priority } = draft;
+    const values = { title, description, projectId, assignee, dueDate, estimate, priority };
+    if (dispatch(task ? 'task.edit' : 'task.create', task ? { id: task.id, values } : draft))
       onClose();
   }
   return (

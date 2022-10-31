@@ -26,3 +26,21 @@ describe('Task creation', () => {
     expect(element.querySelector('workshop-task-editor')).toBeNull();
   });
 });
+
+describe('Editing alongside workflow changes', () => {
+  it('preserves the draft and separately changed status', async () => {
+    const { fixture, element, store } = await setup('#/tasks/T-101');
+    button(element, 'Edit task').click();
+    await settle(fixture);
+    change(control(element, 'Task title'), 'Review revised recovery objectives');
+    await settle(fixture);
+    change(control(element, 'Task status'), 'ready');
+    await settle(fixture);
+    expect(control(element, 'Task title').value).toBe('Review revised recovery objectives');
+    button(element, 'Save task').click();
+    await settle(fixture);
+    expect(store.state.tasks[0].title).toBe('Review revised recovery objectives');
+    expect(store.state.tasks[0].status).toBe('ready');
+    expect(element.querySelector('[role="alert"]')).toBeNull();
+  });
+});

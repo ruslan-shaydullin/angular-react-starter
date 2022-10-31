@@ -4,6 +4,10 @@ import { PAGES, pageLabel, routeHash } from '../../workshop/shared/routes';
 @Component({ selector: 'workshop-shell', templateUrl: './Shell.component.html' })
 export class ShellComponent {
   constructor(public s: WorkshopStore) {}
+  skip(event: Event): void {
+    event.preventDefault();
+    document.getElementById('main')?.focus();
+  }
   pages = PAGES;
   pageLabel = pageLabel;
   routeHash = routeHash;

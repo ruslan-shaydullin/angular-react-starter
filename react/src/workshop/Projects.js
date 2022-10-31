@@ -1,7 +1,8 @@
+import { DEFAULT_FILTERS } from './shared/types';
 import { useWorkshop } from './store';
 import { projectRollups } from './shared/project-rollups';
 export default function Projects({ onEdit }) {
-  const { state, updateFilters, navigate } = useWorkshop();
+  const { state, navigate } = useWorkshop();
   return (
     <section className="panel">
       <h2>Projects</h2>
@@ -26,8 +27,7 @@ export default function Projects({ onEdit }) {
             <div className="row">
               <button
                 onClick={() => {
-                  navigate('tasks');
-                  updateFilters({ projectId: project.id });
+                  navigate('tasks', '', { ...DEFAULT_FILTERS, projectId: project.id });
                 }}
               >
                 View project tasks

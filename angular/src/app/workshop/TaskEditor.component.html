@@ -8,7 +8,12 @@
   >
   <form (ngSubmit)="save()" novalidate class="stack">
     <label
-      >Task title<input name="title" [(ngModel)]="draft.title" maxlength="120" required /></label
+      >Task title<input
+        name="title"
+        #titleInput
+        [(ngModel)]="draft.title"
+        maxlength="120"
+        required /></label
     ><label
       >Description<textarea name="description" [(ngModel)]="draft.description" rows="3"></textarea>
     </label>

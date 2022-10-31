@@ -2,9 +2,7 @@
   <h2>Release milestones</h2>
   <ul>
     <li *ngFor="let item of s.state.milestones">
-      <strong>{{ item.name }}</strong> — {{ formatDate(item.dueDate) }} ({{
-        item.taskIds.length
-      }}
+      <strong>{{ item.name }}</strong> — {{ formatDate(item.dueDate) }} ({{ item.taskIds.length }}
       tasks)
     </li>
   </ul>

@@ -33,7 +33,12 @@ export function control(
   label: string
 ): HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement {
   const found = Array.from(element.querySelectorAll('label')).find(
-    (item) => item.childNodes[0]?.textContent?.trim() === label
+    (item) =>
+      Array.from(item.childNodes)
+        .filter((node) => node.nodeType === Node.TEXT_NODE)
+        .map((node) => node.textContent)
+        .join('')
+        .trim() === label
   );
   const input = found?.querySelector('input,select,textarea');
   if (!input) throw new Error('Control not found: ' + label);
