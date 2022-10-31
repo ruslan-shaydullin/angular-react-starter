@@ -29,3 +29,4 @@ Follow the sequence or open the topic that matches the behavior you want to insp
 25. [Verify complete keyboard paths](accessibility.md)
 26. [Keep comparison surfaces locally scrollable](responsive-design.md)
 27. [Test domain invariants without a framework](testing-domain.md)
+28. [Exercise adapters through user-visible behavior](testing-components.md)
